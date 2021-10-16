@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="张丽超个人博客" />
+  
+  <meta name="description" content="Java基础语法（一） Java基础语法部分与c++及c语言大同小异，本篇列举我容易搞混的点。  Java命名规范 规范这种东西，当然是能遵守就遵守，你不遵守，虽然不会怎么样，但是容易被喷。毕竟代码都是给别人看的，可读性很重要。   Java对大小写很敏感，hello和Hello不同。 英文一定要对应意思！！！不然别人真的看了会笑。拼音也就自己看的懂，随便取个a过一段时间自己都看不懂啦。 源文件名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础">
+<meta property="og:url" content="http://example.com/2021/10/16/Java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java基础语法（一） Java基础语法部分与c++及c语言大同小异，本篇列举我容易搞混的点。  Java命名规范 规范这种东西，当然是能遵守就遵守，你不遵守，虽然不会怎么样，但是容易被喷。毕竟代码都是给别人看的，可读性很重要。   Java对大小写很敏感，hello和Hello不同。 英文一定要对应意思！！！不然别人真的看了会笑。拼音也就自己看的懂，随便取个a过一段时间自己都看不懂啦。 源文件名">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1771072/201911/1771072-20191110144346123-957714335.jpg">
+<meta property="article:published_time" content="2021-10-16T02:49:06.000Z">
+<meta property="article:modified_time" content="2021-10-16T02:54:45.332Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1771072/201911/1771072-20191110144346123-957714335.jpg">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">ZhangLichao&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        ZhangLichao&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="MinHow" target="_blank" href="//minhow.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/wongminho">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/WongMinHo">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/huangminhow">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Java基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Java基础
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-10-16
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="Java基础语法（一）"><a href="#Java基础语法（一）" class="headerlink" title="Java基础语法（一）"></a>Java基础语法（一）</h1><blockquote>
+<p>Java基础语法部分与c++及c语言大同小异，本篇列举我容易搞混的点。</p>
+</blockquote>
+<h2 id="Java命名规范"><a href="#Java命名规范" class="headerlink" title="Java命名规范"></a>Java命名规范</h2><blockquote>
+<p>规范这种东西，当然是能遵守就遵守，你不遵守，虽然不会怎么样，但是容易被喷。毕竟代码都是给别人看的，可读性很重要。</p>
+</blockquote>
+<ul>
+<li>Java<strong>对大小写很敏感</strong>，hello和Hello不同。</li>
+<li>英文一定要对应意思！！！不然别人真的看了会笑。拼音也就自己看的懂，随便取个a过一段时间自己都看不懂啦。</li>
+<li>源文件名必须和类名相同，即<code>类名.java</code>。<strong>不这样搞就错了！</strong></li>
+<li>类名采用大驼峰命名法，即<strong>每个单词首字母大写</strong>。</li>
+<li>变量名，方法名采用小驼峰命名法，即<strong>第一个单词首字母小写，其他单词首字母大写</strong>。</li>
+<li>常量名<strong>全部大写且用<code>_</code>隔开</strong>。</li>
+<li>包名<strong>全部小写且用<code>.</code>隔开</strong>。</li>
+</ul>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><ul>
+<li><code>goto</code>和<code>const</code>是Java的保留字，以备扩充，也就是说，暂时不能用，以后说不定关键字不够用了，他们就上了。</li>
+<li>不能用于常量、变量和任何标识符的名称。</li>
+<li>具体的关键字有哪些，以后应该会遇到，现在写起来也没啥用，还没学到呢。</li>
+</ul>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><blockquote>
+<p>标识符就是用来命名的。</p>
+</blockquote>
+<ul>
+<li>关键字不能当做标识符！</li>
+<li>对大小写敏感。</li>
+<li>开头以<code>A-Z</code>或者<code>a-z</code>,美元符号<code>$</code>或者下划线<code>_</code>开始。</li>
+<li>数字不能作为开头，但可以放在中间。<code>123hello</code>是错 的！</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
+<li><p>单行：<code>//这是单行注释</code>，<code>/*这也是单行注释*/</code></p>
+</li>
+<li><p>多行注释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*大家好！</span></span><br><span class="line"><span class="comment">*这是多行注释哦！</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>接下来几种注释，在之后的面向对象学习中将会遇到，但在书上看到了，先列在这边。</p>
+</blockquote>
+</li>
+<li><p>类注释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Copyright © 2019 sumerday Powered by .NET Core 3.0.0 on Linux</span></span><br><span class="line"><span class="comment">* FileName: HelloWorld.java</span></span><br><span class="line"><span class="comment">* 类的详细说明</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 类创建者姓名</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Date</span>    创建日期</span></span><br><span class="line"><span class="comment">* <span class="doctag">@version</span> 1.00</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+<li><p>方法注释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 类方法的详细使用说明</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> 参数 参数的使用说明</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span> 返回结果的说明</span></span><br><span class="line"><span class="comment">* <span class="doctag">@throws</span> 异常类型.错误代码 注明从此类方法中抛出异常的说明</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+<li><p>属性注释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 提示信息 */</span></span><br><span class="line"><span class="keyword">private</span> String myName = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>方法内部注释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//背景颜色</span></span><br><span class="line">Color backGroundColor = Color.Blue</span><br></pre></td></tr></table></figure></li>
+<li><p>构造方法注释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 构造方法的详细使用说明</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> 参数 参数的使用说明</span></span><br><span class="line"><span class="comment">* <span class="doctag">@throws</span> 异常类型.错误代码 注明从此类方法中抛出异常的说明</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><ul>
+<li>常量就是执行程序的时候，值不发生改变的量。</li>
+<li>Java中用<code>final</code>关键字来修饰常量,而且只能被赋值一次。例如：<code>final int NUM = 5;</code></li>
+<li>Java中空常量<code>null</code>无法输出。</li>
+</ul>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><blockquote>
+<p>变量相当于一个有名称的容器，用于装不同类型的数据。</p>
+</blockquote>
+<blockquote>
+<p>Java和c系列语言不同的是，Java对声明和定义不区分。</p>
+</blockquote>
+<ul>
+<li><p>变量的定义：<code>变量类型 变量名称;</code>或者<code>变量类型 变量名称 = 初始值;</code></p>
+</li>
+<li><p>变量可以分为局部变量和成员变量，成员变量又分为实例变量和类变量，之后会进行总结。</p>
+</li>
+<li><p>变量还可以加修饰符，之后也会提到。</p>
+</li>
+<li><p>声明一个变量之后，一定得用赋值语句对其进行显示初始化，不能使用未初始化的变量。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下会报错</span></span><br><span class="line"><span class="keyword">double</span> num;</span><br><span class="line">System.out.println(num);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Java基础语法（二）"><a href="#Java基础语法（二）" class="headerlink" title="Java基础语法（二）"></a>Java基础语法（二）</h1><blockquote>
+<p>承接上篇，谈到不同变量装载着不同数据类型的数据，那么Java支持的数据类型有哪些呢，本篇做一点小小的探究。</p>
+</blockquote>
+<hr>
+<h2 id="一、强类型语言"><a href="#一、强类型语言" class="headerlink" title="一、强类型语言"></a>一、强类型语言</h2><blockquote>
+<p>Java就是一种<strong>强类型</strong>的语言，包含着以下含义：</p>
+</blockquote>
+<ul>
+<li><u>所有的变量必须在声明之后才能使用</u>，不能用的不明不白或者用得很随意。</li>
+<li><u>指定类型的变量只能结束类型与之匹配的值</u>，很好理解，种瓜得瓜，种豆得豆，这才正常。</li>
+</ul>
+<h2 id="二、数据类型分类"><a href="#二、数据类型分类" class="headerlink" title="二、数据类型分类"></a>二、数据类型分类</h2><blockquote>
+<p>Java数据类型分为<strong>基本数据类型</strong>和<strong>引用数据类型</strong>两大类。</p>
+</blockquote>
+<h3 id="1、基本数据类型"><a href="#1、基本数据类型" class="headerlink" title="1、基本数据类型"></a>1、基本数据类型</h3><blockquote>
+<p>字符类型其实归于整数类型，是<strong>无符号整数类型</strong>。但鉴于他和其他兄弟姐妹有点不一样，所以把他单独拎出来，基本数据类型变分成了四类。</p>
+</blockquote>
+<h4 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h4><blockquote>
+<p>1字节 = 8位</p>
+</blockquote>
+<h5 id="四种类型所占内存空间："><a href="#四种类型所占内存空间：" class="headerlink" title="四种类型所占内存空间："></a>四种类型所占内存空间：</h5><ul>
+<li><code>byte</code>:在内存中占1个字节，也就是8位，表数范围：-2^7 ~2^7-1</li>
+<li><code>short</code>:在内存中占2个字节，也就是16位，表数范围：-2^{15} ~2^{15}-1</li>
+<li><code>int</code>: 在内存中占4个字节，也就是32位，表数范围：-2^{31} ~2^{31}-1</li>
+<li><code>long</code>: 在内存中占8个字节，也就是64位，表数范围：-2^{63}~2^{63}-1</li>
+</ul>
+<h5 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h5><ul>
+<li>如果将一个比较小的整数（当然比byte和short要小）赋给byte和short变量，系统会自动把他们当作这两种类型处理。</li>
+<li>如果把上面那个小的整数赋给long变量，系统首先会把数值当作int处理，int类型之后自动转换成long类型。</li>
+<li>如果使用一个较大的整数值（反正比int大），系统则不会自动把他当作long处理，如果想的话，就在后面加上L或者l吧，推荐L。</li>
+</ul>
+<h5 id="整数的表示方式："><a href="#整数的表示方式：" class="headerlink" title="整数的表示方式："></a>整数的表示方式：</h5><ul>
+<li><p>二进制：以0b或者0B开头。</p>
+</li>
+<li><p>八进制：以0开头。</p>
+</li>
+<li><p>十进制：懂得都懂。</p>
+</li>
+<li><p>十六进制：以0x或者0X开头。</p>
+<blockquote>
+<p>所有的数字在计算机底层都是以二进制的形式存在的，且以补码的形式保存所有的整数。</p>
+<ul>
+<li>正数的补码和原码完全相同。</li>
+<li><strong>负数最高位符号位不变，其他去反，整体加1，就是补码。</strong></li>
+</ul>
+</blockquote>
+</li>
+<li><p>整数值默认是int类型，占32位，且最高位为符号位。最后加上L之后，转换成long类型，占64位。</p>
+</li>
+<li><p>由于最高位符号位的存在，当强制转换时，可能会导致数据产生偏差。</p>
+</li>
+</ul>
+<h4 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h4><blockquote>
+<p>字符型的值要用单引号<code>&#39; &#39;</code>,<strong>一定是单引号</strong>！！！Java使用16位的Unicode字符集作为编码方式，所以支持任何语言。</p>
+<p>定义方式 <code>char varName;</code></p>
+</blockquote>
+<h5 id="字符型表现形式："><a href="#字符型表现形式：" class="headerlink" title="字符型表现形式："></a>字符型表现形式：</h5><ul>
+<li>直接通过单个字符表示。如<code>A</code>,<code>0</code>等。</li>
+<li>通过转义字符表示，如<code>\t</code>,<code>\r</code>,<code>\n</code>等。如果想输出特殊的字符，则需要加上<code>\</code>再次转义，例如<code>&quot;d:\\numert&quot;.</code></li>
+<li>通过Unicode值表示，如<code>\uXXXX</code>,XXXX代表一个16进制整数。</li>
+</ul>
+<h4 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h4><h5 id="两种类型所占内存空间："><a href="#两种类型所占内存空间：" class="headerlink" title="两种类型所占内存空间："></a>两种类型所占内存空间：</h5><ul>
+<li><code>float</code>:单精度浮点数，占4个字节，32位，第一位符号位，后8位为指数，后23位为尾数。</li>
+<li><code>double</code>:双精度浮点数，占8个字节，64位，第一位符号位，后11位指数，后52位尾数。</li>
+</ul>
+<h5 id="注意事项：-1"><a href="#注意事项：-1" class="headerlink" title="注意事项："></a>注意事项：</h5><ul>
+<li><strong>默认类型为double类型</strong>，想用float类型处理，需要在后面i爱上f或者F。</li>
+<li>浮点数需要加上小数点，不然当成int处理就懵逼了。</li>
+<li>只有浮点数类型的数值才能用科学记数法：3.14e2表示3.14*10^2</li>
+</ul>
+<h5 id="关键的无穷："><a href="#关键的无穷：" class="headerlink" title="关键的无穷："></a>关键的无穷：</h5><blockquote>
+<p>Java为浮点数运算提供了三个特殊的浮点数值：正无穷大，负无穷大和非数。</p>
+</blockquote>
+<ul>
+<li>正无穷大：正数除以0得到-&gt;<code>POSITIVE_INFINITY</code>.</li>
+<li>负无穷大：负数除以0得到-&gt;<code>NEGATIVE_INFINITY</code>.</li>
+<li>非数：0.0处以0.0或者对负数开方得到-&gt;<code>NaN</code></li>
+<li><strong>注意</strong>：如果整数值除以0，会报错。</li>
+</ul>
+<blockquote>
+<p>如果数值中位数过多，不论整数还是浮点数都可以通过下划线分割：<code>0b0000_0000_0010_1111</code></p>
+</blockquote>
+<h4 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h4><ul>
+<li>只有boolean类型，表示逻辑“真”或“假”。</li>
+<li><u>Java中不能用0或者非0表示true或者false。</u></li>
+<li>其他的基本数据类型也不能转换成boolean类型。</li>
+<li>boolean类型值和字符串进行连接时，会自动转换为字符串类型。</li>
+</ul>
+<h3 id="2、引用数据类型"><a href="#2、引用数据类型" class="headerlink" title="2、引用数据类型"></a>2、引用数据类型</h3><blockquote>
+<p>包括类、接口和数组类型，以及特殊的null类型。</p>
+</blockquote>
+<ul>
+<li>之后将会提到。</li>
+</ul>
+<h2 id="三、基本类型转换"><a href="#三、基本类型转换" class="headerlink" title="三、基本类型转换"></a>三、基本类型转换</h2><h3 id="自动类型转换"><a href="#自动类型转换" class="headerlink" title="自动类型转换"></a>自动类型转换</h3><ul>
+<li>自动也就是系统支持的，<u>将表数范围小的数值直接赋给表数较大的变量</u>，就可以实现自动类型转换。</li>
+<li>其实很好理解，类似于数学里的集合，A比B大，C可以存在B里面，当然就可以存在A里面，而且空间还变大了呢，舒服。</li>
+<li>任何基本类型的值和字符串进行连接运算时，都会自动转换成字符串类型，虽然字符串为引用类型。</li>
+<li>下图为自动类型转换图：</li>
+</ul>
+<p><img src="https://img2018.cnblogs.com/blog/1771072/201911/1771072-20191110144346123-957714335.jpg"></p>
+<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><ul>
+<li>相反，自动类型转换图按反方向转换的话，就需要强制转换，格式：<code>（目标类型）值</code>。</li>
+<li>显然，和自动类型相比，强制类型转换是有风险的，可能会溢出，造成信息丢失。</li>
+</ul>
+<h2 id="四、表达式类型的自动提升"><a href="#四、表达式类型的自动提升" class="headerlink" title="四、表达式类型的自动提升"></a>四、表达式类型的自动提升</h2><blockquote>
+<p>当一个算术表达式中包含多个基本类型的值时，整个算术表达式的数据类型会发生自动提升。</p>
+</blockquote>
+<ul>
+<li><p>byte、short和char类型将自动提升为int类型。</p>
+</li>
+<li><p><strong>提升到最高等级操作数同样的类型</strong>。具体查看转换图，右边比左边高。</p>
+</li>
+<li><p>易发生错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个short型变量</span></span><br><span class="line"><span class="keyword">short</span> value = <span class="number">4</span>;</span><br><span class="line"><span class="comment">//右边数值2为int型，所以右边自动转换为int类型，而左边是short，不匹配，错误！</span></span><br><span class="line">value = value -<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> val = <span class="number">3</span>;</span><br><span class="line"><span class="comment">//右边两个操作数都是int型，尽管不能除尽，但仍然得到int型数，输出int值7</span></span><br><span class="line"><span class="keyword">int</span> value = <span class="number">23</span>/val;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;hello&quot;</span>+<span class="string">&#x27;a&#x27;</span>+<span class="number">10</span>);<span class="comment">//输出字符串helloa10</span></span><br><span class="line">System.out.println(<span class="string">&#x27;a&#x27;</span>+<span class="number">10</span>+<span class="string">&quot;hello&quot;</span>);<span class="comment">//‘a&#x27;自动提升至int类型，得出107，之后与字符串拼接，自动转换为字符串类型，输出字符串107hello</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h1 id="数组定义及初始化"><a href="#数组定义及初始化" class="headerlink" title="数组定义及初始化"></a>数组定义及初始化</h1><blockquote>
+<p>数组这玩意是一种用于存放数据最常见数据结构。</p>
+</blockquote>
+<h2 id="数组的的概念及注意点"><a href="#数组的的概念及注意点" class="headerlink" title="数组的的概念及注意点"></a>数组的的概念及注意点</h2><ul>
+<li>数组要求所有的数组元素具有相同的数据类型，且只能存在一种数据类型，要多专一有多专一。</li>
+<li>数据类型既可以是基本类型也可以是引用类型，类里虽然有不同对象，但都属于同一类，也可存于数组。</li>
+<li>数组就是一种引用类型。</li>
+<li>数组一旦初始化完成，长度就已经确定，所占内存空间也被固定且不能改变，把数据删除也没用。</li>
+</ul>
+<h2 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/ 定义数组</span><br><span class="line"><span class="keyword">char</span>[] initArrays;</span><br><span class="line"><span class="keyword">char</span> initArrays1[];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>两者都可以定义一个数组，但建议使用第一种，也就是<code>type[] arrayname</code>,因为具有较好的可读性，让人一看就知道是个char[]类型的。</li>
+<li>仅仅定义了一个引用对象，且并没有指向任何的内存，所以暂时是不能使用的，需要对它<strong>初始化</strong>！</li>
+</ul>
+<h2 id="数组的初始化"><a href="#数组的初始化" class="headerlink" title="数组的初始化"></a>数组的初始化</h2><h3 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h3><ul>
+<li>静态初始化</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//静态初始化</span></span><br><span class="line"><span class="keyword">char</span>[] initArrays0;</span><br><span class="line">initArrays0 = <span class="keyword">new</span> <span class="keyword">char</span>[]&#123;<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>&#125;;</span><br><span class="line"><span class="comment">//char[] initArrays0= &#123;&#x27;1&#x27;,&#x27;2&#x27;&#125;;</span></span><br></pre></td></tr></table></figure>
+
+<p><u>静态初始化需要人为显式指定每个数组元素的初始值，由系统决定数组长度。</u></p>
+<p><code>type[] arrayname=&#123;element1，element2...&#125;;</code>是上面两条语句的对于数组静态初始化的简化语法格式。</p>
+<p><strong>注意</strong>：<strong>数组元素由花括号扩起，且由逗号分隔。</strong></p>
+<ul>
+<li>动态初始化</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态初始化</span></span><br><span class="line"><span class="keyword">int</span>[] arrays;</span><br><span class="line">arrays = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line"><span class="comment">//int[] arrays = new int[3];</span></span><br></pre></td></tr></table></figure>
+
+<p><u>动态初始化是人为指定数组长度，由系统为数组元素分配初始值。</u></p>
+<p>同样，动态初始化也有简化格式：<code>type []arrayname = new int[length];</code>。</p>
+<p><strong>注意</strong>：<strong>方括号内需指定数组的长度。</strong></p>
+<blockquote>
+<p>一旦为数组的每个元素数组分配了内存空间，每个内存空间里存储的内容就是该元素的值，即使内容为空，也是null值，所以不论哪种方式初始化数组，都会使数组元素获得初始值。只不过初始值的获得的方式不一样罢了，一个是人给的，一个是系统给的。</p>
+</blockquote>
+<h3 id="动态分配的初始值"><a href="#动态分配的初始值" class="headerlink" title="动态分配的初始值"></a>动态分配的初始值</h3><p>既然动态初始化数组只需要指定每个元素所需的内存空间，由系统为各个元素赋初值，那么，这些初值系统又是如何来赋予的呢。以下是对各个不同类型的数组赋初值的尝试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arrays = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">boolean</span>[] arrays1 = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">3</span>];</span><br><span class="line">String[] arrays2 = <span class="keyword">new</span> String[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">float</span>[] arrays3 = <span class="keyword">new</span> <span class="keyword">float</span>[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">char</span>[] arrays4 = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">3</span>];</span><br><span class="line">System.out.println(arrays[<span class="number">0</span>]);<span class="comment">//0</span></span><br><span class="line">System.out.println(arrays1[<span class="number">0</span>]);<span class="comment">//false</span></span><br><span class="line">System.out.println(arrays2[<span class="number">0</span>]);<span class="comment">//null</span></span><br><span class="line">System.out.println(arrays3[<span class="number">0</span>]);<span class="comment">//0.0</span></span><br><span class="line">System.out.println(arrays4[<span class="number">0</span>]);<span class="comment">//输出&#x27;\u0000&#x27;为空</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再根据查找资料，做出总结：</p>
+<ul>
+<li>整数类型（byte，short，int，long）-&gt;0;</li>
+<li>浮点类型（float，double）-&gt;0.0;</li>
+<li>字符类型（char） -&gt;’\u0000’;</li>
+<li>布尔类型（boolean） -&gt;false;</li>
+<li>引用类型（类，接口，数组）-&gt;null;</li>
+</ul>
+<p><em>小tips：关于输出’\u0000’为空引发的思考：<a target="_blank" rel="noopener" href="http://www.caotama.com/96796.html">Java 中各种空（””、\u0000、null）的区别？</a></em></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年10月16日 10:54</p>
+        <p>原始链接： <a class="post-url" href="/2021/10/16/Java%E5%9F%BA%E7%A1%80/" title="Java基础">http://example.com/2021/10/16/Java%E5%9F%BA%E7%A1%80/</a></p>
+        <footer>
+            <a href="http://example.com">
+                <img src="/images/logo.png" alt="John Doe">
+                John Doe
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/10/16/Java%E5%9F%BA%E7%A1%80/&title=《Java基础》 — Hexo&pic=http://example.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/10/16/Java%E5%9F%BA%E7%A1%80/&title=《Java基础》 — Hexo&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/10/16/Java%E5%9F%BA%E7%A1%80/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java基础》 — Hexo&url=http://example.com/2021/10/16/Java%E5%9F%BA%E7%A1%80/&via=http://example.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://example.com/2021/10/16/Java%E5%9F%BA%E7%A1%80/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://example.com/2021/10/16/Java%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89"><span class="post-toc-text">Java基础语法（一）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="post-toc-text">Java命名规范</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97"><span class="post-toc-text">关键字</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="post-toc-text">标识符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="post-toc-text">注释</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="post-toc-text">常量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%98%E9%87%8F"><span class="post-toc-text">变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="post-toc-text">Java基础语法（二）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81%E5%BC%BA%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80"><span class="post-toc-text">一、强类型语言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="post-toc-text">二、数据类型分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">1、基本数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">整数类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B%E6%89%80%E5%8D%A0%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%EF%BC%9A"><span class="post-toc-text">四种类型所占内存空间：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A"><span class="post-toc-text">注意事项：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E6%95%B4%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="post-toc-text">整数的表示方式：</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%AD%97%E7%AC%A6%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">字符类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B%E8%A1%A8%E7%8E%B0%E5%BD%A2%E5%BC%8F%EF%BC%9A"><span class="post-toc-text">字符型表现形式：</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">浮点类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B%E6%89%80%E5%8D%A0%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%EF%BC%9A"><span class="post-toc-text">两种类型所占内存空间：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A-1"><span class="post-toc-text">注意事项：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%85%B3%E9%94%AE%E7%9A%84%E6%97%A0%E7%A9%B7%EF%BC%9A"><span class="post-toc-text">关键的无穷：</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">布尔类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2%E3%80%81%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">2、引用数据类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="post-toc-text">三、基本类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="post-toc-text">自动类型转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="post-toc-text">强制类型转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%87%AA%E5%8A%A8%E6%8F%90%E5%8D%87"><span class="post-toc-text">四、表达式类型的自动提升</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%95%B0%E7%BB%84%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">数组定义及初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E7%9A%84%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="post-toc-text">数组的的概念及注意点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">数组的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">数组的初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BD%A2%E5%BC%8F"><span class="post-toc-text">形式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%9A%84%E5%88%9D%E5%A7%8B%E5%80%BC"><span class="post-toc-text">动态分配的初始值</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/16/Nodejs/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Nodejs</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 John Doe<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://example.com",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/life/">life</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>关于我</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
