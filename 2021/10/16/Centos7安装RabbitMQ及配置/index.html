@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Centos7安装RabbitMQ及配置 | ZhangLichao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="张丽超个人博客" />
+  
+  <meta name="description" content="前言最近在学习SpringCloud，发现其中的消息总线是依靠消息中间件实现的，加之公司也有在使用RabbitMQ，所以就想从零开始，从官网逐步学习一下RabbitMQ。下面的安装教程是我从官网一步一步翻译、实践过来的，如有表达不到位，还请多多指教！RabbitMQ官方安装教程  rpm包安装 1.1. 用户权限  使用rpm包安装，要求我们拥有sudo权限，如果没有sudo权限的话，请参考官网如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos7安装RabbitMQ及配置">
+<meta property="og:url" content="https://zhanglc1998.github.io/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="ZhangLichao">
+<meta property="og:description" content="前言最近在学习SpringCloud，发现其中的消息总线是依靠消息中间件实现的，加之公司也有在使用RabbitMQ，所以就想从零开始，从官网逐步学习一下RabbitMQ。下面的安装教程是我从官网一步一步翻译、实践过来的，如有表达不到位，还请多多指教！RabbitMQ官方安装教程  rpm包安装 1.1. 用户权限  使用rpm包安装，要求我们拥有sudo权限，如果没有sudo权限的话，请参考官网如">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1181622/201907/1181622-20190704174454266-1014572202.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1181622/201907/1181622-20190704174640739-2105181498.png">
+<meta property="article:published_time" content="2021-10-16T07:04:13.000Z">
+<meta property="article:modified_time" content="2021-10-16T11:09:46.138Z">
+<meta property="article:author" content="ZhangLichao">
+<meta property="article:tag" content="RabbitMQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1181622/201907/1181622-20190704174454266-1014572202.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">ZhangLichao&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        ZhangLichao&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a   ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a   ">
+                            <i class="fa fa-weixin fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Centos7安装RabbitMQ及配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Centos7安装RabbitMQ及配置
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-10-16
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>前言<br>最近在学习SpringCloud，发现其中的消息总线是依靠消息中间件实现的，加之公司也有在使用RabbitMQ，所以就想从零开始，从官网逐步学习一下RabbitMQ。下面的安装教程是我从官网一步一步翻译、实践过来的，如有表达不到位，还请多多指教！RabbitMQ官方安装教程</p>
+<ol>
+<li>rpm包安装<br> 1.1. 用户权限</li>
+</ol>
+<p>使用rpm包安装，要求我们拥有sudo权限，如果没有sudo权限的话，请参考官网如何使用源码进行安装。</p>
+<pre><code>1.2. 安装依赖环境Erlang
+</code></pre>
+<p>方法一：</p>
+<p>安装erlang-rpm包，该包经过RabbitMQ官方处理，去掉了一些无用的依赖，只保存运行RabbitMQ所需要的Erlang模块。</p>
+<p>方法二：</p>
+<p>使用Erlang Solutions源进行安装</p>
+<h1 id="下载rpm包"><a href="#下载rpm包" class="headerlink" title="下载rpm包"></a>下载rpm包</h1><p>wget <a target="_blank" rel="noopener" href="https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm">https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm</a></p>
+<h1 id="从erlang-solutions中更新该包，并将erlang-solutions-repo添加到-etc-yum-repos-d"><a href="#从erlang-solutions中更新该包，并将erlang-solutions-repo添加到-etc-yum-repos-d" class="headerlink" title="从erlang-solutions中更新该包，并将erlang_solutions.repo添加到/etc/yum.repos.d"></a>从erlang-solutions中更新该包，并将erlang_solutions.repo添加到/etc/yum.repos.d</h1><p>rpm -Uvh erlang-solutions-1.0-1.noarch.rpm</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>yum install erlang</p>
+<hr>
+<p>该包还需依赖到epel源，请确保已有该源,若没有则可通过以下方式安装：<br>wget <a target="_blank" rel="noopener" href="http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm">http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a><br>rpm -ivh epel-release-latest-7.noarch.rpm<br>yum repolist # 查看安装是否成功<br>由于Erlang Solutions会进行不断地更新，且RabbitMQ对Erlang的版本有一定的要求（官方版本要求对应表）。所以官方建议我们禁止Erlang版本的自动更新。方法如下：参考如何禁止某个软件包的自动升级</p>
+<h1 id="安装yum-versionlock"><a href="#安装yum-versionlock" class="headerlink" title="安装yum-versionlock"></a>安装yum-versionlock</h1><p>yum install yum-plugin-versionlock</p>
+<h1 id="禁止Erlang自动更新"><a href="#禁止Erlang自动更新" class="headerlink" title="禁止Erlang自动更新"></a>禁止Erlang自动更新</h1><p>yum versionlock erlang<br>注：默认情况下，yum似乎是不会自动更新软件的，除非安装了yum-cron这个软件或者自己写了某些自动更新脚本。如果是前者的话，我们也可以 cd /etc/yum 目录下，将yum-cron.conf中的download_updates = yes 改为 no。</p>
+<p>方法三：</p>
+<p>使用EPEL(“Extra Packages for Enterprise Linux”)进行安装，但该方式安装到的包可能不是最新版的，所以在安装前请自行确认好版本号是否适合。</p>
+<p>yum install erlang<br>    1.3. 安装RabbitMQ Server</p>
+<p>从官网下载rpm包并上传到服务器上。官方下载链接</p>
+<h1 id="导入签名"><a href="#导入签名" class="headerlink" title="导入签名"></a>导入签名</h1><p>rpm –import <a target="_blank" rel="noopener" href="https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc">https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc</a></p>
+<h1 id="或"><a href="#或" class="headerlink" title="或"></a>或</h1><p>rpm –import <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/rabbitmq-release-signing-key.asc">https://www.rabbitmq.com/rabbitmq-release-signing-key.asc</a></p>
+<h1 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h1><p>yum install rabbitmq-server-3.7.7-1.el7.noarch.rpm<br> 2. 使用脚本安装<br>#创建erlang.repo库<br>curl -s <a target="_blank" rel="noopener" href="https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh">https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh</a> | sudo bash<br>#安装<br>yum install erlang</p>
+<p>#创建rabbitmq-server.repo库<br>curl -s <a target="_blank" rel="noopener" href="https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh">https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh</a> | sudo bash<br>#安装<br>yum install rabbitmq-server<br>这种方式虽然会简单点，但我尝试过，发现只有翻墙才能安装成功，所以不太推荐大家使用这种方法。</p>
+<ol start="3">
+<li>启动RabbitMQ Server<h1 id="设置开启启动"><a href="#设置开启启动" class="headerlink" title="设置开启启动"></a>设置开启启动</h1>chkconfig rabbitmq-server on</li>
+</ol>
+<h1 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h1><p>service rabbitmq-server start</p>
+<p>#停止服务<br>service rabbitmq-server stop</p>
+<p>开启web插件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br></pre></td></tr></table></figure>
+
+<p>访问：<a target="_blank" rel="noopener" href="http://127.0.0.1:15672/">http://127.0.0.1:15672/</a></p>
+<p><img src="https://img2018.cnblogs.com/blog/1181622/201907/1181622-20190704174454266-1014572202.png" alt="img"></p>
+<p>默认账号密码：guest guest（这个账号只允许本机访问）</p>
+<p>回到顶部</p>
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><p>查看所有用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl list_users</span><br></pre></td></tr></table></figure>
+
+<p>添加一个用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl add_user zhaobl 123456</span><br></pre></td></tr></table></figure>
+
+<p>配置权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl set_permissions -p &quot;/&quot; zhaobl &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br></pre></td></tr></table></figure>
+
+<p>查看用户权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl list_user_permissions zhaobl</span><br></pre></td></tr></table></figure>
+
+<p>设置tag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl set_user_tags zhaobl administrator</span><br></pre></td></tr></table></figure>
+
+<p>删除用户（安全起见，删除默认用户）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl delete_user guest</span><br></pre></td></tr></table></figure>
+
+<p>回到顶部</p>
+<h3 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h3><p>配置好用户之后重启一下rabbit</p>
+<p>然后就可以用新账号进行登陆</p>
+<p><img src="https://img2018.cnblogs.com/blog/1181622/201907/1181622-20190704174640739-2105181498.png" alt="img"></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年10月16日 19:09</p>
+        <p>原始链接： <a class="post-url" href="/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/" title="Centos7安装RabbitMQ及配置">https://zhanglc1998.github.io/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/</a></p>
+        <footer>
+            <a href="https://zhanglc1998.github.io">
+                <img src="/images/logo.png" alt="ZhangLichao">
+                ZhangLichao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhanglc1998.github.io/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/&title=《Centos7安装RabbitMQ及配置》 — ZhangLichao&pic=images/rabbitmq.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhanglc1998.github.io/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/&title=《Centos7安装RabbitMQ及配置》 — ZhangLichao&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhanglc1998.github.io/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Centos7安装RabbitMQ及配置》 — ZhangLichao&url=https://zhanglc1998.github.io/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/&via=https://zhanglc1998.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhanglc1998.github.io/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhanglc1998.github.io/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/RabbitMQ/" class="color4">RabbitMQ</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BDrpm%E5%8C%85"><span class="post-toc-text">下载rpm包</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%8Eerlang-solutions%E4%B8%AD%E6%9B%B4%E6%96%B0%E8%AF%A5%E5%8C%85%EF%BC%8C%E5%B9%B6%E5%B0%86erlang-solutions-repo%E6%B7%BB%E5%8A%A0%E5%88%B0-etc-yum-repos-d"><span class="post-toc-text">从erlang-solutions中更新该包，并将erlang_solutions.repo添加到&#x2F;etc&#x2F;yum.repos.d</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85yum-versionlock"><span class="post-toc-text">安装yum-versionlock</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%A6%81%E6%AD%A2Erlang%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="post-toc-text">禁止Erlang自动更新</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AF%BC%E5%85%A5%E7%AD%BE%E5%90%8D"><span class="post-toc-text">导入签名</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%88%96"><span class="post-toc-text">或</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E5%90%AF%E5%90%AF%E5%8A%A8"><span class="post-toc-text">设置开启启动</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="post-toc-text">启动服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="post-toc-text">用户管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%99%BB%E9%99%86"><span class="post-toc-text">登陆</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          SpringBoot+mysql+Redis整合增删改查操作
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3Gateway/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">SpringCloud学习笔记（十一）服务网关Gateway</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 ZhangLichao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://zhanglc1998.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/life/">life</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.33px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.33px;">Redis</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 20px;">SpringCloud</a> <a href="/tags/SpringMvc/" style="font-size: 10px;">SpringMvc</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>关于我</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.33px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.33px;">Redis</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 20px;">SpringCloud</a> <a href="/tags/SpringMvc/" style="font-size: 10px;">SpringMvc</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

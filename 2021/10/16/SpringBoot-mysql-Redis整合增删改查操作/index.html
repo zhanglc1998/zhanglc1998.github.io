@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SpringBoot+mysql+Redis整合增删改查操作 | ZhangLichao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="张丽超个人博客" />
+  
+  <meta name="description" content="SpringBoot+mysql+Redis整合增删改查操作前言:1.项目结构webdemo1java|_________bean|_________config（redis模板类）|_________controller|_________mapper|_________service|______Webdemo1Application（springboot启动类）resources|_____">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot+mysql+Redis整合增删改查操作">
+<meta property="og:url" content="https://zhanglc1998.github.io/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="ZhangLichao">
+<meta property="og:description" content="SpringBoot+mysql+Redis整合增删改查操作前言:1.项目结构webdemo1java|_________bean|_________config（redis模板类）|_________controller|_________mapper|_________service|______Webdemo1Application（springboot启动类）resources|_____">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-16T10:52:40.000Z">
+<meta property="article:modified_time" content="2021-10-16T11:11:09.966Z">
+<meta property="article:author" content="ZhangLichao">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">ZhangLichao&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        ZhangLichao&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a   ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a   ">
+                            <i class="fa fa-weixin fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-SpringBoot-mysql-Redis整合增删改查操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      SpringBoot+mysql+Redis整合增删改查操作
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-10-16
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="SpringBoot-mysql-Redis整合增删改查操作"><a href="#SpringBoot-mysql-Redis整合增删改查操作" class="headerlink" title="SpringBoot+mysql+Redis整合增删改查操作"></a>SpringBoot+mysql+Redis整合增删改查操作</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言:"></a>前言:</h2><h3 id="1-项目结构"><a href="#1-项目结构" class="headerlink" title="1.项目结构"></a>1.项目结构</h3><p>webdemo1<br>java<br>|_________bean<br>|_________config（redis模板类）<br>|_________controller<br>|_________mapper<br>|_________service<br>|______Webdemo1Application（springboot启动类）<br>resources<br>|_________application.yml</p>
+<h3 id="2-实现步骤"><a href="#2-实现步骤" class="headerlink" title="2.实现步骤"></a>2.实现步骤</h3><h4 id="2-1-通过SpringInitializr创建SpringBoot项目。-操作请参考上篇-SpringBoot入门"><a href="#2-1-通过SpringInitializr创建SpringBoot项目。-操作请参考上篇-SpringBoot入门" class="headerlink" title="2.1.通过SpringInitializr创建SpringBoot项目。(操作请参考上篇:SpringBoot入门)"></a>2.1.通过SpringInitializr创建SpringBoot项目。(操作请参考上篇:SpringBoot入门)</h4><h4 id="2-2创建User类与UserDao"><a href="#2-2创建User类与UserDao" class="headerlink" title="2.2创建User类与UserDao"></a>2.2创建User类与UserDao</h4><h5 id="User类"><a href="#User类" class="headerlink" title="User类:"></a>User类:</h5><p>public class User implements Serializable {</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"><span class="keyword">private</span> Integer id;</span><br><span class="line"><span class="keyword">private</span> String userName;</span><br><span class="line"><span class="keyword">private</span> String passWord;</span><br><span class="line"><span class="keyword">private</span> Integer sex;</span><br><span class="line"><span class="keyword">private</span> Date birthday;</span><br><span class="line"></span><br><span class="line"><span class="comment">//setter and  getter method    </span></span><br></pre></td></tr></table></figure>
+<p>}</p>
+<h5 id="mysql表结构"><a href="#mysql表结构" class="headerlink" title="mysql表结构:"></a>mysql表结构:</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table t_user(</span><br><span class="line">	id int(11) auto_increment comment &#x27;编号&#x27;,</span><br><span class="line">  user_name varchar(50) default &#x27;&#x27; comment &#x27;用户名称&#x27;,</span><br><span class="line">  pass_word varchar(50) default &#x27;&#x27; comment &#x27;用户密码&#x27;,</span><br><span class="line">  sex int(3) default null comment &#x27;年龄&#x27;,</span><br><span class="line">  birthday  datetime  comment &#x27;生日&#x27;,</span><br><span class="line">  primary key (id)</span><br><span class="line">)engine=innodb auto_increment =1 comment &#x27;用户表&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="UserDao类"><a href="#UserDao类" class="headerlink" title="UserDao类:"></a>UserDao类:</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line">    <span class="comment">//用户列表</span></span><br><span class="line">    <span class="meta">@Select(&quot;select * from t_user&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;userName&quot;,column = &quot;user_name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;passWord&quot;,column = &quot;pass_word&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">queryAll</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">//根据id获取user</span></span><br><span class="line">    <span class="meta">@Select(&quot;select * from t_user where id =#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;userName&quot;,column = &quot;user_name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;passWord&quot;,column = &quot;pass_word&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">User <span class="title">findUserById</span><span class="params">(Integer id)</span></span>;</span><br><span class="line">    <span class="comment">//根据id修改user</span></span><br><span class="line">    <span class="meta">@Update(&quot;update t_user set user_name=#&#123;userName&#125;,pass_word =#&#123;passWord&#125;,sex=#&#123;sex&#125;,birthday=#&#123;birthday&#125; WHERE id = #&#123;id&#125; &quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateUser</span><span class="params">(User user)</span></span>;</span><br><span class="line">    <span class="comment">//根据id删除用户</span></span><br><span class="line">    <span class="meta">@Delete(&quot;delete from t_user where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">deleteUserById</span><span class="params">(Integer id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-3创建RedisConfig模板类"><a href="#2-3创建RedisConfig模板类" class="headerlink" title="2.3创建RedisConfig模板类"></a>2.3创建RedisConfig模板类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * 配置redistemplate序列化</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   <span class="meta">@Configuration</span></span><br><span class="line">   <span class="meta">@EnableCaching</span></span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> <span class="keyword">extends</span> <span class="title">CachingConfigurerSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    * 选择redis作为默认缓存工具</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">      <span class="meta">@Bean</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span></span>&#123;</span><br><span class="line">      <span class="comment">//设置缓存有效一小时</span></span><br><span class="line">      RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.</span><br><span class="line">              defaultCacheConfig().entryTtl(Duration.ofHours(<span class="number">1</span>));</span><br><span class="line">      <span class="keyword">return</span> RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory)).cacheDefaults(redisCacheConfiguration).build();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    * 配置redistemplate相关配置</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">      <span class="meta">@Bean</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="title">redisTemplate</span><span class="params">(RedisConnectionFactory factory)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">      <span class="comment">// 配置连接工厂</span></span><br><span class="line">      template.setConnectionFactory(factory);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）</span></span><br><span class="line">      Jackson2JsonRedisSerializer jacksonSeial = <span class="keyword">new</span> Jackson2JsonRedisSerializer(Object.class);</span><br><span class="line"></span><br><span class="line">      ObjectMapper om = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">      <span class="comment">// 指定要序列化的域，field,get和set,以及修饰符范围，ANY是都有包括private和public</span></span><br><span class="line">      om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">      <span class="comment">// 指定序列化输入的类型，类必须是非final修饰的，final修饰的类，比如String,Integer等会跑出异常</span></span><br><span class="line">      om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">      jacksonSeial.setObjectMapper(om);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 值采用json序列化</span></span><br><span class="line">      template.setValueSerializer(jacksonSeial);</span><br><span class="line">      <span class="comment">//使用StringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">      template.setKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 设置hash key 和value序列化模式</span></span><br><span class="line">      template.setHashKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</span><br><span class="line">      template.setHashValueSerializer(jacksonSeial);</span><br><span class="line">      template.afterPropertiesSet();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> template;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    * 对hash类型的数据操作</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> HashOperations&lt;String,String,Object&gt; <span class="title">hashOperations</span><span class="params">(RedisTemplate&lt;String,Object&gt; redisTemplate)</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> redisTemplate.opsForHash();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    * 对redis字符串类型数据库操作</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">      <span class="meta">@Bean</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> ValueOperations&lt;String, Object&gt; <span class="title">valueOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> redisTemplate.opsForValue();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    * 对链表类型的数据操作</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">      <span class="meta">@Bean</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> ListOperations&lt;String, Object&gt; <span class="title">listOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> redisTemplate.opsForList();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    * 对无序集合Set操作</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">      <span class="meta">@Bean</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> SetOperations&lt;String, Object&gt; <span class="title">setOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> redisTemplate.opsForSet();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    * 对有序集合</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">      <span class="meta">@Bean</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> ZSetOperations&lt;String, Object&gt; <span class="title">zSetOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> redisTemplate.opsForZSet();</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-4创建service类"><a href="#2-4创建service类" class="headerlink" title="2.4创建service类"></a>2.4创建service类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> UserDao userDao;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate;<span class="comment">//查所有用户</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">queryAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> userDao.queryAll();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取用户策略:先从缓存中获取用户，没有则读mysql数据，再将数据写入缓存</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">findUserById</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">    String key = <span class="string">&quot;user_&quot;</span>+id;</span><br><span class="line">    ValueOperations&lt;String,User&gt;  operations = redisTemplate.opsForValue();</span><br><span class="line">    <span class="comment">//判断redis中是否有键为key的缓存</span></span><br><span class="line">    <span class="keyword">boolean</span> hasKey = redisTemplate.hasKey(key);</span><br><span class="line">    <span class="keyword">if</span>(hasKey)&#123;</span><br><span class="line">        User user = operations.get(key);</span><br><span class="line">        System.out.println(<span class="string">&quot;从缓存中获取数据:&quot;</span>+user.getUserName());</span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------------&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        User user = userDao.findUserById(id);</span><br><span class="line">        System.out.println(<span class="string">&quot;查询数据库获取数据:&quot;</span>+user.getUserName());</span><br><span class="line">        System.out.println(<span class="string">&quot;------------写入缓存---------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//写入缓存</span></span><br><span class="line">        operations.set(key,user,<span class="number">5</span>, TimeUnit.HOURS);</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除用户策略:删除数据表中数据，然后删除缓存</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteUserById</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = userDao.deleteUserById(id);</span><br><span class="line">    String key = <span class="string">&quot;user_&quot;</span>+id;</span><br><span class="line">    <span class="keyword">if</span>(result!=<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasKey = redisTemplate.hasKey(key);</span><br><span class="line">        <span class="keyword">if</span>(hasKey)&#123;</span><br><span class="line">            redisTemplate.delete(key);</span><br><span class="line">            System.out.println(<span class="string">&quot;删除了缓存中的key:&quot;</span>+key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 更新用户策略：先更新数据表，成功之后，删除原来的缓存，再更新缓存</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">updateUser</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    ValueOperations&lt;String, User&gt; operations = redisTemplate.opsForValue();</span><br><span class="line">    <span class="keyword">int</span> result = userDao.updateUser(user);</span><br><span class="line">    <span class="keyword">if</span> (result != <span class="number">0</span>) &#123;</span><br><span class="line">        String key = <span class="string">&quot;user_&quot;</span> + user.getId();</span><br><span class="line">        <span class="keyword">boolean</span> haskey = redisTemplate.hasKey(key);</span><br><span class="line">        <span class="keyword">if</span> (haskey) &#123;</span><br><span class="line">            redisTemplate.delete(key);</span><br><span class="line">            System.out.println(<span class="string">&quot;删除缓存中的key-----------&gt; &quot;</span> + key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 再将更新后的数据加入缓存</span></span><br><span class="line">        User userNew = userDao.findUserById(user.getId());</span><br><span class="line">        <span class="keyword">if</span> (userNew != <span class="keyword">null</span>) &#123;</span><br><span class="line">            operations.set(key, userNew, <span class="number">3</span>, TimeUnit.HOURS);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="2-5创建Controller类"><a href="#2-5创建Controller类" class="headerlink" title="2.5创建Controller类"></a>2.5创建Controller类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/queryAll&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">queryAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;User&gt; lists = userService.queryAll();</span><br><span class="line">    <span class="keyword">return</span> lists;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/findUserById&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">findUserById</span><span class="params">(<span class="meta">@RequestParam</span> <span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">    User user = userService.findUserById(id);</span><br><span class="line">    Map&lt;String, Object&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    result.put(<span class="string">&quot;id&quot;</span>, user.getId());</span><br><span class="line">    result.put(<span class="string">&quot;userName&quot;</span>, user.getUserName());</span><br><span class="line">    result.put(<span class="string">&quot;pwd&quot;</span>, user.getPassWord());</span><br><span class="line">    result.put(<span class="string">&quot;sex&quot;</span>, user.getSex());</span><br><span class="line">    result.put(<span class="string">&quot;birthday&quot;</span>,user.getBirthday());</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/updateUser&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">updateUser</span><span class="params">()</span></span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setId(<span class="number">1</span>);</span><br><span class="line">    user.setUserName(<span class="string">&quot;AAAAA&quot;</span>);</span><br><span class="line">    user.setPassWord(<span class="string">&quot;123456&quot;</span>);</span><br><span class="line">    user.setSex(<span class="number">1</span>);</span><br><span class="line">    user.setBirthday(<span class="keyword">new</span> Date());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> result = userService.updateUser(user);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(result != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;update user success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;fail&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/deleteUserById&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">deleteUserById</span><span class="params">(<span class="meta">@RequestParam</span> <span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = userService.deleteUserById(id);</span><br><span class="line">    <span class="keyword">if</span>(result != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;delete success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;delete fail&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-6-application-yml配置详细"><a href="#2-6-application-yml配置详细" class="headerlink" title="2.6 application.yml配置详细"></a>2.6 application.yml配置详细</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#数据库连接</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/springboot?useUnicode=true</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">123456</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Redis-配置"><a href="#Redis-配置" class="headerlink" title="Redis 配置"></a>Redis 配置</h2> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">redis:</span></span><br><span class="line">   <span class="comment">## Redis数据库索引（默认为0）</span></span><br><span class="line">   <span class="attr">database:</span> <span class="number">0</span></span><br><span class="line">   <span class="comment">## Redis服务器地址</span></span><br><span class="line">   <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">   <span class="comment">## Redis服务器连接端口</span></span><br><span class="line">   <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">   <span class="comment">## Redis服务器连接密码（默认为空）</span></span><br><span class="line">   <span class="attr">password:</span></span><br><span class="line">   <span class="attr">jedis:</span></span><br><span class="line">     <span class="attr">pool:</span></span><br><span class="line">       <span class="comment">## 连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line">       <span class="comment">#spring.redis.pool.max-active=8</span></span><br><span class="line">       <span class="attr">max-active:</span> <span class="number">8</span></span><br><span class="line">       <span class="comment">## 连接池最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line">       <span class="comment">#spring.redis.pool.max-wait=-1</span></span><br><span class="line">       <span class="attr">max-wait:</span> <span class="number">-1</span></span><br><span class="line">       <span class="comment">## 连接池中的最大空闲连接</span></span><br><span class="line">       <span class="comment">#spring.redis.pool.max-idle=8</span></span><br><span class="line">       <span class="attr">max-idle:</span> <span class="number">8</span></span><br><span class="line">       <span class="comment">## 连接池中的最小空闲连接</span></span><br><span class="line">       <span class="comment">#spring.redis.pool.min-idle=0</span></span><br><span class="line">       <span class="attr">min-idle:</span> <span class="number">0</span></span><br><span class="line">   <span class="comment">## 连接超时时间（毫秒）</span></span><br><span class="line">   <span class="attr">timeout:</span> <span class="number">1200</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">#将themilef的默认缓存禁用，热加载生效</span></span><br><span class="line"> <span class="attr">thymeleaf:</span></span><br><span class="line">   <span class="attr">cache:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">#mybatis的下划线转驼峰配置</span></span><br><span class="line"> <span class="attr">configuration:</span></span><br><span class="line">   <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-7-配置文件pom-xml"><a href="#2-7-配置文件pom-xml" class="headerlink" title="2.7 配置文件pom.xml"></a>2.7 配置文件pom.xml</h4><p>​    </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;!--mybatis与spring boot2.x整合包--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!--mysql驱动--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.1.20&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;</span><br><span class="line">        &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年10月16日 19:11</p>
+        <p>原始链接： <a class="post-url" href="/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/" title="SpringBoot+mysql+Redis整合增删改查操作">https://zhanglc1998.github.io/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</a></p>
+        <footer>
+            <a href="https://zhanglc1998.github.io">
+                <img src="/images/logo.png" alt="ZhangLichao">
+                ZhangLichao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhanglc1998.github.io/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/&title=《SpringBoot+mysql+Redis整合增删改查操作》 — ZhangLichao&pic=images/redis.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhanglc1998.github.io/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/&title=《SpringBoot+mysql+Redis整合增删改查操作》 — ZhangLichao&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhanglc1998.github.io/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringBoot+mysql+Redis整合增删改查操作》 — ZhangLichao&url=https://zhanglc1998.github.io/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/&via=https://zhanglc1998.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhanglc1998.github.io/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhanglc1998.github.io/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Redis/" class="color1">Redis</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C"><span class="post-toc-text">SpringBoot+mysql+Redis整合增删改查操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="post-toc-text">1.项目结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="post-toc-text">2.实现步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-%E9%80%9A%E8%BF%87SpringInitializr%E5%88%9B%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE%E3%80%82-%E6%93%8D%E4%BD%9C%E8%AF%B7%E5%8F%82%E8%80%83%E4%B8%8A%E7%AF%87-SpringBoot%E5%85%A5%E9%97%A8"><span class="post-toc-text">2.1.通过SpringInitializr创建SpringBoot项目。(操作请参考上篇:SpringBoot入门)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2%E5%88%9B%E5%BB%BAUser%E7%B1%BB%E4%B8%8EUserDao"><span class="post-toc-text">2.2创建User类与UserDao</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#User%E7%B1%BB"><span class="post-toc-text">User类:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#mysql%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="post-toc-text">mysql表结构:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#UserDao%E7%B1%BB"><span class="post-toc-text">UserDao类:</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3%E5%88%9B%E5%BB%BARedisConfig%E6%A8%A1%E6%9D%BF%E7%B1%BB"><span class="post-toc-text">2.3创建RedisConfig模板类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4%E5%88%9B%E5%BB%BAservice%E7%B1%BB"><span class="post-toc-text">2.4创建service类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-5%E5%88%9B%E5%BB%BAController%E7%B1%BB"><span class="post-toc-text">2.5创建Controller类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-6-application-yml%E9%85%8D%E7%BD%AE%E8%AF%A6%E7%BB%86"><span class="post-toc-text">2.6 application.yml配置详细</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Redis-%E9%85%8D%E7%BD%AE"><span class="post-toc-text">Redis 配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-7-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6pom-xml"><span class="post-toc-text">2.7 配置文件pom.xml</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/10/16/Centos7%E5%AE%89%E8%A3%85RabbitMQ%E5%8F%8A%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Centos7安装RabbitMQ及配置</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 ZhangLichao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://zhanglc1998.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/life/">life</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.33px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.33px;">Redis</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 20px;">SpringCloud</a> <a href="/tags/SpringMvc/" style="font-size: 10px;">SpringMvc</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>关于我</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.33px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.33px;">Redis</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 20px;">SpringCloud</a> <a href="/tags/SpringMvc/" style="font-size: 10px;">SpringMvc</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
