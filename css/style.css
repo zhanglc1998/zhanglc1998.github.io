@@ -532,6 +532,8 @@ body {
 }
 #logo img {
   border-radius: 50%;
+  width: 130px;
+  height: 130px;
   -webkit-transition: all 1.6s;
   transition: all 1.6s;
   -webkit-transition: all 1.6s cubic-bezier(0.17, 0.67, 0.62, 1.22);
