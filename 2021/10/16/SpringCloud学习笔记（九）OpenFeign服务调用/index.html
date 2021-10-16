@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SpringCloud学习笔记（九）OpenFeign服务调用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="张丽超个人博客" />
+  
+  <meta name="description" content="OpenFeign服务接口调用 官网： https:&#x2F;&#x2F;docs.spring.io&#x2F;spring-cloud-openfeign&#x2F;docs&#x2F;2.2.5.RELEASE&#x2F;reference&#x2F;html&#x2F; Github：https:&#x2F;&#x2F;github.com&#x2F;spring-cloud&#x2F;spring-cloud-openfeign  本篇要点 简单介绍Feign与OpenFeign。 介绍OpenFeig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud学习笔记（九）OpenFeign服务调用">
+<meta property="og:url" content="http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="OpenFeign服务接口调用 官网： https:&#x2F;&#x2F;docs.spring.io&#x2F;spring-cloud-openfeign&#x2F;docs&#x2F;2.2.5.RELEASE&#x2F;reference&#x2F;html&#x2F; Github：https:&#x2F;&#x2F;github.com&#x2F;spring-cloud&#x2F;spring-cloud-openfeign  本篇要点 简单介绍Feign与OpenFeign。 介绍OpenFeig">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（九）OpenFeign服务调用/image-20201121162157016.png">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（九）OpenFeign服务调用/image-20201121193836053.png">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（九）OpenFeign服务调用/image-20201121195417133.png">
+<meta property="article:published_time" content="2021-10-16T03:34:15.000Z">
+<meta property="article:modified_time" content="2021-10-16T03:34:32.572Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（九）OpenFeign服务调用/image-20201121162157016.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">ZhangLichao&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        ZhangLichao&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-SpringCloud学习笔记（九）OpenFeign服务调用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      SpringCloud学习笔记（九）OpenFeign服务调用
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-10-16
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="OpenFeign服务接口调用"><a href="#OpenFeign服务接口调用" class="headerlink" title="OpenFeign服务接口调用"></a>OpenFeign服务接口调用</h1><blockquote>
+<p>官网： <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-cloud-openfeign/docs/2.2.5.RELEASE/reference/html/">https://docs.spring.io/spring-cloud-openfeign/docs/2.2.5.RELEASE/reference/html/</a></p>
+<p>Github：<a target="_blank" rel="noopener" href="https://github.com/spring-cloud/spring-cloud-openfeign">https://github.com/spring-cloud/spring-cloud-openfeign</a></p>
+</blockquote>
+<h2 id="本篇要点"><a href="#本篇要点" class="headerlink" title="本篇要点"></a>本篇要点</h2><ul>
+<li>简单介绍Feign与OpenFeign。</li>
+<li>介绍OpenFeign使用流程。</li>
+<li>OpenFeign的超时演示及设置。</li>
+<li>OpenFeign日志打印功能演示。</li>
+</ul>
+<h2 id="OpenFeign简介"><a href="#OpenFeign简介" class="headerlink" title="OpenFeign简介"></a>OpenFeign简介</h2><blockquote>
+<p>Feign is a declarative web service client. It makes writing web service clients easier.  To use Feign create an interface and annotate it.It has pluggable annotation support including Feign annotations and JAX-RS annotations. Feign also supports pluggable encoders and decoders. Spring Cloud adds support for Spring MVC annotations and for using the same HttpMessageConverters used by default in Spring Web. Spring Cloud integrates Ribbon and Eureka, as well as Spring Cloud LoadBalancer to provide a load-balanced http client when using Feign. </p>
+</blockquote>
+<ul>
+<li>Feigh是一个声明式web service客户端，让编写web service客户端变得简单。</li>
+<li>如何使用Feign：创建一个服务接口，添加适当注解：包括Feign注解和JAX-RS注解。</li>
+<li>Feign还支持可插拔的encoders和decoders。</li>
+<li>SpringCloud对Feign进行了封装，让其能够支持SpringMVC注解和HttpMessageConverters。</li>
+<li>Spring Cloud集成了Ribbon和Eureka以及Spring Cloud LoadBalancer，以在使用Feign时提供负载平衡的http客户端。</li>
+</ul>
+<h3 id="Feign能干什么"><a href="#Feign能干什么" class="headerlink" title="Feign能干什么"></a>Feign能干什么</h3><p>Feign旨在使编写Java Http客户端变得更容易。</p>
+<p>前面在使用Ribbon + RestTemplate时，利用RestTemplate对http请求的封装处理， 形成了一套模版化的调用方法。但是在实际开发中，由于对服务依赖的调用可能不止一处，往往一个接口会被多 处调用，所以通常都会针对每个微服务自行封装-些客户端类来包装这些依赖服务的调用。所以,Feign在此基础上做了进一步封装， 由他来帮助我们定义和实现依赖服务接口的定义。<strong>在Feign的实现下我们只需创建一个接口并使用注解的方式来配置它(以前是Dao接口 上面标注Mapper注解现在是一个微服务接口 上面标注一个Feign注解即可)，即可完成对服务提供方的接口绑定，</strong>简化了使用Spring cloud Ribbon时，自动封装服务调用客户端的开发量。</p>
+<h3 id="Feign集成了Ribbon"><a href="#Feign集成了Ribbon" class="headerlink" title="Feign集成了Ribbon"></a>Feign集成了Ribbon</h3><p>利用Ribbon维护了Payment的服务列表信息，并且通过轮询实现了客户端的负载均衡。而与Ribbon不同的是，通过feign只需要定义服务绑定接口且以声明式的方法，优雅而简单的实现了服务调用</p>
+<h3 id="Feign与OpenFeign的区别"><a href="#Feign与OpenFeign的区别" class="headerlink" title="Feign与OpenFeign的区别"></a>Feign与OpenFeign的区别</h3><p><img src="F:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（九）OpenFeign服务调用/image-20201121162157016.png" alt="image-20201121162157016"></p>
+<h2 id="OpenFeign使用步骤"><a href="#OpenFeign使用步骤" class="headerlink" title="OpenFeign使用步骤"></a>OpenFeign使用步骤</h2><p>前提：准备好Eureka服务注册中心，以及两个provider-payment服务8001和8002，我们接着使用OpenFeign代替Ribbon+RestTemplate实现的负载均衡与服务调用。</p>
+<h3 id="新建消费端模块"><a href="#新建消费端模块" class="headerlink" title="新建消费端模块"></a>新建消费端模块</h3><p>新建<code>cloud-consumer-feign-order80</code>模块，主要引入以下两个依赖，其他的依赖可以翻到底部源码下载查看：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--openfeign--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--eureka client--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编写yml"><a href="#编写yml" class="headerlink" title="编写yml"></a>编写yml</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编写主启动类"><a href="#编写主启动类" class="headerlink" title="编写主启动类"></a>编写主启动类</h3><p><code>@EnableFeignClients</code>激活Feign，启用客户端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@EnableFeignClients</span> 激活开启</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> summerday</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderFeign80Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(OrderFeign80Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写业务类"><a href="#编写业务类" class="headerlink" title="编写业务类"></a>编写业务类</h3><p>创建Feign客户端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@FeignClient(value = &quot;cloud-payment-service&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PaymentFeignClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/payment/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function">AjaxResult <span class="title">getById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@FeignClient注解中的value值用于创建Ribbon负载均衡器或SpringCloud负载均衡器，你还可以使用url属性来指定url</p>
+<p>上面的<code>load-balancer client</code>将发现<code>&quot;cloud-payment-service&quot;</code>服务的物理地址。 如果你的应用程序是Eureka客户端，则它将在Eureka服务注册表中解析该服务。 如果你不想使用Eureka，那么只需使用SimpleDiscoveryClient在外部配置中配置服务器列表即可。</p>
+<h3 id="编写消费者端的控制器"><a href="#编写消费者端的控制器" class="headerlink" title="编写消费者端的控制器"></a>编写消费者端的控制器</h3><p>注入FeignClient实例，并调用其接口，进而调用生产者端的接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentFeignController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PaymentFeignClient paymentFeignClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/consumer/payment/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AjaxResult <span class="title">getById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> paymentFeignClient.getById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们来理一理大致的流程，当我们发送<code>localhost/consumer/payment/1</code>请求的时候：</p>
+<ol>
+<li>先来到PaymentFeignController，执行getById方法，调用paymentFeignClient。</li>
+<li>paymentFeignClient会通过我们配置的服务名【cloud-payment-service】找到对应的接口，并调用。</li>
+<li>接口回调，返回结果。</li>
+</ol>
+<h2 id="OpenFeign超时设置"><a href="#OpenFeign超时设置" class="headerlink" title="OpenFeign超时设置"></a>OpenFeign超时设置</h2><p>OpenFeign默认调用的服务超时时间为1s，如果超过会报错。</p>
+<h3 id="超时演示"><a href="#超时演示" class="headerlink" title="超时演示"></a>超时演示</h3><p>演示代码比较简单，直接提供一个业务逻辑不存在问题，只是存在延迟问题的接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/payment/timeOut&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">paymentTimeOut</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 延迟3s</span></span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> serverPort;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@FeignClient(value = &quot;cloud-payment-service&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PaymentFeignClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/payment/timeOut&quot;)</span></span><br><span class="line">    <span class="function">String <span class="title">paymentTimeOut</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentFeignController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PaymentFeignClient paymentFeignClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/consumer/payment/timeOut&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentTimeOut</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//openFeign ribbon客户端默认等待1s</span></span><br><span class="line">        <span class="keyword">return</span> paymentFeignClient.paymentTimeOut();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>启动Eureka服务中心，注册生产者服务端，启动消费端，访问：<code>localhost/consumer/payment/timeOut</code>，默认超过1s，将会直接在页面上抛出异常。</p>
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（九）OpenFeign服务调用/image-20201121193836053.png" alt="image-20201121193836053"></p>
+<h3 id="超时设置"><a href="#超时设置" class="headerlink" title="超时设置"></a>超时设置</h3><p>超过1s直接报错确实挺狠，但有时候真的需要消费者等待一定的时间，这怎么办呢？在yml中配置即可。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置feign客户端超时时间(OpenFeign默认支持ribbon)</span></span><br><span class="line"><span class="attr">ribbon:</span></span><br><span class="line">  <span class="comment">#指的是建立连接后从服务器读取到可用资源所用的时间</span></span><br><span class="line">  <span class="attr">ReadTimeout:</span> <span class="number">5000</span></span><br><span class="line">  <span class="comment">#指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间</span></span><br><span class="line">  <span class="attr">ConnectTimeout:</span> <span class="number">5000</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="OpenFeign日志打印增强"><a href="#OpenFeign日志打印增强" class="headerlink" title="OpenFeign日志打印增强"></a>OpenFeign日志打印增强</h2><p>Feign提供了日志打印功能，我们可以通过配置来调整日志级别，从而了解Feign中Http请求的细节。</p>
+<p>说白了就是对<strong>Feign接口的调用情况进行监控和输出</strong></p>
+<h3 id="OpenFeign的日志级别"><a href="#OpenFeign的日志级别" class="headerlink" title="OpenFeign的日志级别"></a>OpenFeign的日志级别</h3><ul>
+<li><p>NONE：默认的，不显示任何日志;</p>
+</li>
+<li><p>BASIC：仅记录请求方法、URL、 响应状态码及执行时间;</p>
+</li>
+<li><p>HEADERS：除了BASIC 中定义的信息之外，还有请求和响应的头信息;</p>
+</li>
+<li><p>FULL：除了HEADERS中定义的信息之外,还有请求和响应的正文及元数据。</p>
+</li>
+</ul>
+<h3 id="如何启动日志打印功能"><a href="#如何启动日志打印功能" class="headerlink" title="如何启动日志打印功能"></a>如何启动日志打印功能</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    Logger.<span class="function">Level <span class="title">feignLoggerLevel</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Logger.Level.FULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">    <span class="attr">com.hyh.springcloud.service.PaymentFeignClient:</span> <span class="string">debug</span></span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（九）OpenFeign服务调用/image-20201121195417133.png" alt="image-20201121195417133"></p>
+<h2 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h2><p>本系列文章为《尚硅谷SpringCloud教程》的学习笔记【版本稍微有些不同，后续遇到bug再做相关说明】，主要做一个长期的记录，为以后学习的同学提供示例，代码同步更新到Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/tqbx/spring-cloud-learning">https://gitee.com/tqbx/spring-cloud-learning</a>，并且以标签的形式详细区分每个步骤，这个系列文章也会同步更新。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年10月16日 11:34</p>
+        <p>原始链接： <a class="post-url" href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/" title="SpringCloud学习笔记（九）OpenFeign服务调用">http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/</a></p>
+        <footer>
+            <a href="http://example.com">
+                <img src="/images/logo.png" alt="John Doe">
+                John Doe
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/&title=《SpringCloud学习笔记（九）OpenFeign服务调用》 — Hexo&pic=http://example.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/&title=《SpringCloud学习笔记（九）OpenFeign服务调用》 — Hexo&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringCloud学习笔记（九）OpenFeign服务调用》 — Hexo&url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/&via=http://example.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#OpenFeign%E6%9C%8D%E5%8A%A1%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8"><span class="post-toc-text">OpenFeign服务接口调用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%AC%E7%AF%87%E8%A6%81%E7%82%B9"><span class="post-toc-text">本篇要点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenFeign%E7%AE%80%E4%BB%8B"><span class="post-toc-text">OpenFeign简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Feign%E8%83%BD%E5%B9%B2%E4%BB%80%E4%B9%88"><span class="post-toc-text">Feign能干什么</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Feign%E9%9B%86%E6%88%90%E4%BA%86Ribbon"><span class="post-toc-text">Feign集成了Ribbon</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Feign%E4%B8%8EOpenFeign%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="post-toc-text">Feign与OpenFeign的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenFeign%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="post-toc-text">OpenFeign使用步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%96%B0%E5%BB%BA%E6%B6%88%E8%B4%B9%E7%AB%AF%E6%A8%A1%E5%9D%97"><span class="post-toc-text">新建消费端模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BC%96%E5%86%99yml"><span class="post-toc-text">编写yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%BB%E5%90%AF%E5%8A%A8%E7%B1%BB"><span class="post-toc-text">编写主启动类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%9A%E5%8A%A1%E7%B1%BB"><span class="post-toc-text">编写业务类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BC%96%E5%86%99%E6%B6%88%E8%B4%B9%E8%80%85%E7%AB%AF%E7%9A%84%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="post-toc-text">编写消费者端的控制器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenFeign%E8%B6%85%E6%97%B6%E8%AE%BE%E7%BD%AE"><span class="post-toc-text">OpenFeign超时设置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%B6%85%E6%97%B6%E6%BC%94%E7%A4%BA"><span class="post-toc-text">超时演示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%B6%85%E6%97%B6%E8%AE%BE%E7%BD%AE"><span class="post-toc-text">超时设置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenFeign%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%A2%9E%E5%BC%BA"><span class="post-toc-text">OpenFeign日志打印增强</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#OpenFeign%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB"><span class="post-toc-text">OpenFeign的日志级别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%8A%9F%E8%83%BD"><span class="post-toc-text">如何启动日志打印功能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="post-toc-text">源码下载</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89Hystrix%E6%96%AD%E8%B7%AF%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          SpringCloud学习笔记（十）Hystrix断路器
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">SpringCloud学习笔记（八）Ribbon负载均衡</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 John Doe<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://example.com",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/life/">life</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>关于我</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

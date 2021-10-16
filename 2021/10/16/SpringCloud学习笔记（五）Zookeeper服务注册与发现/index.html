@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SpringCloud学习笔记（五）Zookeeper服务注册与发现 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="张丽超个人博客" />
+  
+  <meta name="description" content="Zookeeper的服务注册与发现安装Zookeeper环境  Zookeeper的3.4.9  Windows和Linux环境皆可，这里介绍一下使用Docker启动Zookeeper。 直接看这篇文章就好了：Docker安装Zookeeper以及Zk常用命令 创建Zk服务提供者模块引入依赖12345&lt;!--SpringBoot整合zookeeper客户端--&gt;&lt;dependen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud学习笔记（五）Zookeeper服务注册与发现">
+<meta property="og:url" content="http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Zookeeper的服务注册与发现安装Zookeeper环境  Zookeeper的3.4.9  Windows和Linux环境皆可，这里介绍一下使用Docker启动Zookeeper。 直接看这篇文章就好了：Docker安装Zookeeper以及Zk常用命令 创建Zk服务提供者模块引入依赖12345&lt;!--SpringBoot整合zookeeper客户端--&gt;&lt;dependen">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120192032957.png">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120192158457.png">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120195208625.png">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120200230461.png">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120201419130.png">
+<meta property="article:published_time" content="2021-10-16T03:30:55.000Z">
+<meta property="article:modified_time" content="2021-10-16T03:31:10.631Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120192032957.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">ZhangLichao&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        ZhangLichao&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-SpringCloud学习笔记（五）Zookeeper服务注册与发现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      SpringCloud学习笔记（五）Zookeeper服务注册与发现
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-10-16
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="Zookeeper的服务注册与发现"><a href="#Zookeeper的服务注册与发现" class="headerlink" title="Zookeeper的服务注册与发现"></a>Zookeeper的服务注册与发现</h1><h2 id="安装Zookeeper环境"><a href="#安装Zookeeper环境" class="headerlink" title="安装Zookeeper环境"></a>安装Zookeeper环境</h2><blockquote>
+<p> Zookeeper的3.4.9</p>
+</blockquote>
+<p>Windows和Linux环境皆可，这里介绍一下使用Docker启动Zookeeper。</p>
+<p>直接看这篇文章就好了：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/summerday152/p/14012622.html">Docker安装Zookeeper以及Zk常用命令</a></p>
+<h2 id="创建Zk服务提供者模块"><a href="#创建Zk服务提供者模块" class="headerlink" title="创建Zk服务提供者模块"></a>创建Zk服务提供者模块</h2><h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--SpringBoot整合zookeeper客户端--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zookeeper-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置yml"><a href="#配置yml" class="headerlink" title="配置yml"></a>配置yml</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#8004表示注册到zookeeper服务器的支付服务提供者端口号</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8004</span></span><br><span class="line"><span class="comment">#服务别名----注册zookeeper到注册中心名称</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-provider-payment</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">zookeeper:</span></span><br><span class="line">      <span class="attr">connect-string:</span> <span class="number">121.199</span><span class="number">.16</span><span class="number">.31</span><span class="string">:2181</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加注解-EnableDiscoveryClient"><a href="#添加注解-EnableDiscoveryClient" class="headerlink" title="添加注解@EnableDiscoveryClient"></a>添加注解@EnableDiscoveryClient</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> summerday</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * //<span class="doctag">@EnableDiscoveryClient</span>该注解用于向使用consul或者zookeeper作为注册中心时注册服务</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Payment8004Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Payment8004Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="编写Controller"><a href="#编写Controller" class="headerlink" title="编写Controller"></a>编写Controller</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;server.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverPort;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/payment/zk&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentZk</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;spring cloud with zookeeper: &quot;</span> + serverPort + <span class="string">&quot;\t&quot;</span> + UUID.randomUUID().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们希望将这个模块注册进Zookeeper注册中心。</p>
+<h3 id="测试，发现jar包冲突"><a href="#测试，发现jar包冲突" class="headerlink" title="测试，发现jar包冲突"></a>测试，发现jar包冲突</h3><p>启动程序，我们发现程序直接报错，并且戛然而止。</p>
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120192032957.png" alt="image-20201120192032957"></p>
+<p>经过排查，可以发现是jar包发生了冲突，原来我们引入的依赖自带着一个<code>zookeeper-3.5.3-beta.jar</code>，而我们的zookeeper是3.4.9的。</p>
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120192158457.png" alt="image-20201120192158457"></p>
+<h2 id="解决jar包冲突"><a href="#解决jar包冲突" class="headerlink" title="解决jar包冲突"></a>解决jar包冲突</h2><h3 id="zookeeper版本"><a href="#zookeeper版本" class="headerlink" title="zookeeper版本"></a>zookeeper版本</h3><p><strong>方法一、卸载现有的zookeeper，安装3.5.3版本的即可</strong></p>
+<p>当然，这个方法可以解决冲突，但是好好地把已安装的zk卸载了，不够妥当。</p>
+<p><strong>方法二、排除jar包依赖，引入3.4.9包</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--SpringBoot整合zookeeper客户端--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zookeeper-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--先排除自带的zookeeper3.5.3--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--添加zookeeper3.4.9版本--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="日志框架多绑定"><a href="#日志框架多绑定" class="headerlink" title="日志框架多绑定"></a>日志框架多绑定</h3><p>如果这样你以为就成功了，非也，因为还有存在冲突的情况，如日志冲突：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLF4J: Class path contains multiple SLF4J bindings.</span><br></pre></td></tr></table></figure>
+
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120195208625.png" alt="image-20201120195208625"></p>
+<p>同理，我们排除掉<code>slf4j-log4j12</code>就行了。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--排除slf4j-log4j12--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="继续测试"><a href="#继续测试" class="headerlink" title="继续测试"></a>继续测试</h2><p>在zookeeper中执行命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 7] ls / # 查看根目录下的节点</span><br><span class="line">[services, zookeeper]</span><br><span class="line">[zk: localhost:2181(CONNECTED) 8] ls /services  # 查看/services目录下的节点，成功入驻</span><br><span class="line">[cloud-provider-payment] # yml中配置的spring.application.name</span><br><span class="line">[zk: localhost:2181(CONNECTED) 9] ls /services/cloud-provider-payment</span><br><span class="line">[b780fc19-2823-4420-9937-3959de87720b] # 流水号</span><br><span class="line">[zk: localhost:2181(CONNECTED) 10] get /services/cloud-provider-payment/b780fc19-2823-4420-9937-3959de87720b # 获取znode结构</span><br><span class="line">&#123;&quot;name&quot;:&quot;cloud-provider-payment&quot;,&quot;id&quot;:&quot;b780fc19-2823-4420-9937-3959de87720b&quot;,&quot;address&quot;:&quot;DESKTOP-QFK0MBG&quot;,&quot;port&quot;:8004,&quot;sslPort&quot;:null,&quot;payload&quot;:&#123;&quot;@class&quot;:&quot;org.springframework.cloud.zookeeper.discovery.ZookeeperInstance&quot;,&quot;id&quot;:&quot;application-1&quot;,&quot;name&quot;:&quot;cloud-provider-payment&quot;,&quot;metadata&quot;:&#123;&quot;instance_status&quot;:&quot;UP&quot;&#125;&#125;,&quot;registrationTimeUTC&quot;:1605873188009,&quot;serviceType&quot;:&quot;DYNAMIC&quot;,&quot;uriSpec&quot;:&#123;&quot;parts&quot;:[&#123;&quot;value&quot;:&quot;scheme&quot;,&quot;variable&quot;:true&#125;,&#123;&quot;value&quot;:&quot;://&quot;,&quot;variable&quot;:false&#125;,&#123;&quot;value&quot;:&quot;address&quot;,&quot;variable&quot;:true&#125;,&#123;&quot;value&quot;:&quot;:&quot;,&quot;variable&quot;:false&#125;,&#123;&quot;value&quot;:&quot;port&quot;,&quot;variable&quot;:true&#125;]&#125;&#125;</span><br><span class="line">cZxid = 0x31</span><br><span class="line">ctime = Fri Nov 20 11:53:09 GMT 2020</span><br><span class="line">mZxid = 0x31</span><br><span class="line">mtime = Fri Nov 20 11:53:09 GMT 2020</span><br><span class="line">pZxid = 0x31</span><br><span class="line">cversion = 0</span><br><span class="line">dataVersion = 0</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x175e40811430010</span><br><span class="line">dataLength = 558</span><br><span class="line">numChildren = 0</span><br></pre></td></tr></table></figure>
+
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120200230461.png" alt="image-20201120200230461"></p>
+<p>此时，我们的服务已经成功注册进zookeeper注册中心。</p>
+<h2 id="Zookeeper注册的服务是临时节点"><a href="#Zookeeper注册的服务是临时节点" class="headerlink" title="Zookeeper注册的服务是临时节点"></a>Zookeeper注册的服务是临时节点</h2><p>我们直到Eureka默认是开启自我保护机制的：<strong>宁可同时保留错误的服务注册信息，也不盲目注销任何可能健康的服务实例</strong>。</p>
+<p>而Zookeeper不同，一旦你服务停止，在下一次心跳的时候，服务会被剔除，服务可以再次连接，但流水号会发生改变。</p>
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（五）Zookeeper服务注册与发现/image-20201120201419130.png" alt="image-20201120201419130"></p>
+<h2 id="创建Zk服务消费者模块"><a href="#创建Zk服务消费者模块" class="headerlink" title="创建Zk服务消费者模块"></a>创建Zk服务消费者模块</h2><p>pom，yml，启动类注解差不太多，这里就不赘述了，感兴趣可以查看仓库代码：<a target="_blank" rel="noopener" href="https://gitee.com/tqbx/spring-cloud-learning">https://gitee.com/tqbx/spring-cloud-learning</a>，以标签的形式详细区分每个步骤。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderZKController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String INVOKE_URL = <span class="string">&quot;http://cloud-provider-payment&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LoadBalanced</span> <span class="comment">// 不加该注解，会导致：java.net.UnknownHostException: cloud-provider-payment</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;/consumer/payment/zk&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">paymentInfo</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(INVOKE_URL+<span class="string">&quot;/payment/zk&quot;</span>,String.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们同时启动消费者和提供者，zookeeper中就会注册进两个service。消费者访问<code>localhost/consumer/payment/zk</code>，将会调用提供者的接口，完成需求。</p>
+<h2 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h2><p>本系列文章为《尚硅谷SpringCloud教程》的学习笔记【版本稍微有些不同，后续遇到bug再做相关说明】，主要做一个长期的记录，为以后学习的同学提供示例，代码同步更新到Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/tqbx/spring-cloud-learning">https://gitee.com/tqbx/spring-cloud-learning</a>，并且以标签的形式详细区分每个步骤，这个系列文章也会同步更新。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年10月16日 11:31</p>
+        <p>原始链接： <a class="post-url" href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" title="SpringCloud学习笔记（五）Zookeeper服务注册与发现">http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</a></p>
+        <footer>
+            <a href="http://example.com">
+                <img src="/images/logo.png" alt="John Doe">
+                John Doe
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/&title=《SpringCloud学习笔记（五）Zookeeper服务注册与发现》 — Hexo&pic=http://example.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/&title=《SpringCloud学习笔记（五）Zookeeper服务注册与发现》 — Hexo&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringCloud学习笔记（五）Zookeeper服务注册与发现》 — Hexo&url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/&via=http://example.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Zookeeper%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0"><span class="post-toc-text">Zookeeper的服务注册与发现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85Zookeeper%E7%8E%AF%E5%A2%83"><span class="post-toc-text">安装Zookeeper环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BAZk%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85%E6%A8%A1%E5%9D%97"><span class="post-toc-text">创建Zk服务提供者模块</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="post-toc-text">引入依赖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%85%8D%E7%BD%AEyml"><span class="post-toc-text">配置yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3-EnableDiscoveryClient"><span class="post-toc-text">添加注解@EnableDiscoveryClient</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BC%96%E5%86%99Controller"><span class="post-toc-text">编写Controller</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B5%8B%E8%AF%95%EF%BC%8C%E5%8F%91%E7%8E%B0jar%E5%8C%85%E5%86%B2%E7%AA%81"><span class="post-toc-text">测试，发现jar包冲突</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3jar%E5%8C%85%E5%86%B2%E7%AA%81"><span class="post-toc-text">解决jar包冲突</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#zookeeper%E7%89%88%E6%9C%AC"><span class="post-toc-text">zookeeper版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%A4%9A%E7%BB%91%E5%AE%9A"><span class="post-toc-text">日志框架多绑定</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%A7%E7%BB%AD%E6%B5%8B%E8%AF%95"><span class="post-toc-text">继续测试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Zookeeper%E6%B3%A8%E5%86%8C%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%98%AF%E4%B8%B4%E6%97%B6%E8%8A%82%E7%82%B9"><span class="post-toc-text">Zookeeper注册的服务是临时节点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BAZk%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9D%97"><span class="post-toc-text">创建Zk服务消费者模块</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="post-toc-text">源码下载</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89Consul%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          SpringCloud学习笔记（六）Consul服务注册与发现
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Eureka%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">SpringCloud学习笔记（四）Eureka的自我保护机制</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 John Doe<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://example.com",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/life/">life</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>关于我</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

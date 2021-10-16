@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SpringCloud学习笔记（三）集群信息获取+服务列表信息获取 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="张丽超个人博客" />
+  
+  <meta name="description" content="本篇要点 介绍Eureka管理界面主机名和访问ip信息提示修改。 介绍获取当前注册中心服务列表，以及获取每个服务的实例列表的方法。  Actuator微服务信息完善前提除了eureka依赖之外，确保已经引入以下依赖： 12345678&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;    &amp;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud学习笔记（三）集群信息获取+服务列表信息获取">
+<meta property="og:url" content="http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本篇要点 介绍Eureka管理界面主机名和访问ip信息提示修改。 介绍获取当前注册中心服务列表，以及获取每个服务的实例列表的方法。  Actuator微服务信息完善前提除了eureka依赖之外，确保已经引入以下依赖： 12345678&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;    &amp;l">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/11-19/image-20201118230841052.png">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/11-19/image-20201119000726813.png">
+<meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/11-19/image-20201119003658308.png">
+<meta property="article:published_time" content="2021-10-16T03:29:22.000Z">
+<meta property="article:modified_time" content="2021-10-16T03:29:44.909Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="f:/桌面文件/JavaBlog/微服务学习/img/11-19/image-20201118230841052.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">ZhangLichao&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        ZhangLichao&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-SpringCloud学习笔记（三）集群信息获取-服务列表信息获取" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      SpringCloud学习笔记（三）集群信息获取+服务列表信息获取
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-10-16
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="本篇要点"><a href="#本篇要点" class="headerlink" title="本篇要点"></a>本篇要点</h2><ul>
+<li>介绍Eureka管理界面主机名和访问ip信息提示修改。</li>
+<li>介绍获取当前注册中心服务列表，以及获取每个服务的实例列表的方法。</li>
+</ul>
+<h2 id="Actuator微服务信息完善"><a href="#Actuator微服务信息完善" class="headerlink" title="Actuator微服务信息完善"></a>Actuator微服务信息完善</h2><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>除了eureka依赖之外，确保已经引入以下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="主机名称：服务名称修改"><a href="#主机名称：服务名称修改" class="headerlink" title="主机名称：服务名称修改"></a>主机名称：服务名称修改</h3><p>我们回顾一下：当我们访问Eureka的后台管理页面时，注册的客户端的Status是这样的：笔记本+服务名+端口：</p>
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/11-19/image-20201118230841052.png" alt="image-20201118230841052"></p>
+<p>如果我们有特殊的定制需求，其实Status的信息可以通过<code>eureka.instance.instance-id</code>自定义：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="comment">#表示是否将自己注册进EurekaServer默认为true。</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment">#是否从EurekaServer抓取已有的注册信息，默认为true。单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡</span></span><br><span class="line">    <span class="attr">fetchRegistry:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="comment">#单机版</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://localhost:7001/eureka</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">instance-id:</span> <span class="string">payment8002</span></span><br></pre></td></tr></table></figure>
+
+<p>修改结果显示如下：</p>
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/11-19/image-20201119000726813.png" alt="image-20201119000726813"></p>
+<h3 id="显示IP地址"><a href="#显示IP地址" class="headerlink" title="显示IP地址"></a>显示IP地址</h3><p>在啥也没有配置的时候，我们需要点击Status中的服务链接，才会显示诸如：<code>http://desktop-qfk0mbg:8002/actuator/info</code>的链接地址，如果我们想让鼠标悬浮显示IP地址，我们也是有办法的：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="comment">#..省略</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">instance-id:</span> <span class="string">payment8001</span></span><br><span class="line">    <span class="comment">#访问路径可以显示IP地址</span></span><br><span class="line">    <span class="attr">prefer-ip-address:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>再次测试，url变为：<code>http://172.28.11.140:8002/actuator/info</code>。</p>
+<h2 id="Eureka服务发现"><a href="#Eureka服务发现" class="headerlink" title="Eureka服务发现"></a>Eureka服务发现</h2><p>对于注册进Eureka的微服务，可以通过服务发现来获得该服务的信息，这里以Payment8001模块为例演示具体步骤。</p>
+<h3 id="注入DiscoveryClient，获取信息"><a href="#注入DiscoveryClient，获取信息" class="headerlink" title="注入DiscoveryClient，获取信息"></a>注入DiscoveryClient，获取信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> DiscoveryClient discoveryClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/payment/discovery&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">discovery</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        List&lt;String&gt; services = discoveryClient.getServices();</span><br><span class="line">        services.forEach(log::info);</span><br><span class="line">        map.put(<span class="string">&quot;获取的服务列表&quot;</span>,services);</span><br><span class="line">        List&lt;ServiceInstance&gt; instances = discoveryClient.getInstances(<span class="string">&quot;CLOUD-PAYMENT-SERVICE&quot;</span>);</span><br><span class="line">        List&lt;String&gt; instanceList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        instances.forEach(x -&gt; &#123;</span><br><span class="line">            log.info(x.getServiceId() + <span class="string">&quot;\n&quot;</span> + x.getHost() + <span class="string">&quot;\n&quot;</span> + x.getPort() + <span class="string">&quot;\n&quot;</span> +  x.getUri());</span><br><span class="line">            instanceList.add(<span class="string">&quot;ServiceId : &quot;</span> + x.getServiceId() + <span class="string">&quot; Host : &quot;</span> + x.getHost() + <span class="string">&quot; Port : &quot;</span> + x.getPort() + <span class="string">&quot; uri : &quot;</span> + x.getUri());</span><br><span class="line">        &#125;);</span><br><span class="line">        map.put(<span class="string">&quot;服务cloud-payment-service上的实例&quot;</span>,instanceList);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="主程序上加上-EnableDiscoveryClient"><a href="#主程序上加上-EnableDiscoveryClient" class="headerlink" title="主程序上加上@EnableDiscoveryClient"></a>主程序上加上@EnableDiscoveryClient</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Payment8001Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Payment8001Application.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>访问：<code>http://localhost:8001/payment/discovery</code></p>
+<p><img src="F:/桌面文件/JavaBlog/微服务学习/img/11-19/image-20201119003658308.png" alt="image-20201119003658308"></p>
+<p>我们可以成功获得服务列表信息，以及某个服务的所有实例信息。</p>
+<h2 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h2><p>本系列文章为《尚硅谷SpringCloud教程》的学习笔记【版本稍微有些不同，后续遇到bug再做相关说明】，主要做一个长期的记录，为以后学习的同学提供示例，代码同步更新到Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/tqbx/spring-cloud-learning">https://gitee.com/tqbx/spring-cloud-learning</a>，并且以<strong>标签</strong>的形式详细区分每个步骤，这个系列文章也会同步更新，如果内容有误，还望评论区批评指正。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年10月16日 11:29</p>
+        <p>原始链接： <a class="post-url" href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" title="SpringCloud学习笔记（三）集群信息获取+服务列表信息获取">http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/</a></p>
+        <footer>
+            <a href="http://example.com">
+                <img src="/images/logo.png" alt="John Doe">
+                John Doe
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/&title=《SpringCloud学习笔记（三）集群信息获取+服务列表信息获取》 — Hexo&pic=http://example.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/&title=《SpringCloud学习笔记（三）集群信息获取+服务列表信息获取》 — Hexo&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringCloud学习笔记（三）集群信息获取+服务列表信息获取》 — Hexo&url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/&via=http://example.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://example.com/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%AC%E7%AF%87%E8%A6%81%E7%82%B9"><span class="post-toc-text">本篇要点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Actuator%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%A1%E6%81%AF%E5%AE%8C%E5%96%84"><span class="post-toc-text">Actuator微服务信息完善</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%89%8D%E6%8F%90"><span class="post-toc-text">前提</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%90%8D%E7%A7%B0%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%90%8D%E7%A7%B0%E4%BF%AE%E6%94%B9"><span class="post-toc-text">主机名称：服务名称修改</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%98%BE%E7%A4%BAIP%E5%9C%B0%E5%9D%80"><span class="post-toc-text">显示IP地址</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Eureka%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0"><span class="post-toc-text">Eureka服务发现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B3%A8%E5%85%A5DiscoveryClient%EF%BC%8C%E8%8E%B7%E5%8F%96%E4%BF%A1%E6%81%AF"><span class="post-toc-text">注入DiscoveryClient，获取信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E4%B8%8A%E5%8A%A0%E4%B8%8A-EnableDiscoveryClient"><span class="post-toc-text">主程序上加上@EnableDiscoveryClient</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="post-toc-text">测试</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="post-toc-text">源码下载</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Eureka%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          SpringCloud学习笔记（四）Eureka的自我保护机制
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">SpringCloud学习笔记（二）Eureka服务注册与发现</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 John Doe<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://example.com",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/life/">life</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>关于我</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
