@@ -105,14 +105,14 @@
       <div class="outer">
         <section id="main" class="body-wrap">
   
-    <article id="post-SpringCloud学习笔记（三）集群信息获取-服务列表信息获取" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-浅谈Java中接口与抽象类的异同" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/"  >SpringCloud学习笔记（三）集群信息获取+服务列表信息获取</a>
+      <a class="article-title" href="/2021/10/16/%E6%B5%85%E8%B0%88Java%E4%B8%AD%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%BC%82%E5%90%8C/"  >浅谈Java中接口与抽象类的异同</a>
     </h1>
   
 
@@ -122,387 +122,19 @@
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" >
+            <a href="/2021/10/16/%E6%B5%85%E8%B0%88Java%E4%B8%AD%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%BC%82%E5%90%8C/" >
                 
-                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（三）集群信息获取+服务列表信息获取" title="SpringCloud学习笔记（三）集群信息获取+服务列表信息获取">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                本篇要点
-介绍Eureka管理界面主机名和访问ip信息提示修改。
-介绍获取当前注册中心服务列表，以及获取每个服务的实例列表的方法。
-
-Actuator微服务信息完善前提除了eureka依赖之外，确保已经引入以下依赖：
-12345678&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/grou...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/#more" class="article-more-link" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-SpringCloud学习笔记（二）Eureka服务注册与发现" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/"  >SpringCloud学习笔记（二）Eureka服务注册与发现</a>
-    </h1>
-  
-
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" >
-                
-                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（二）Eureka服务注册与发现" title="SpringCloud学习笔记（二）Eureka服务注册与发现">
+                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="浅谈Java中接口与抽象类的异同" title="浅谈Java中接口与抽象类的异同">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                Eureka服务注册与发现
-Eureka2.0已经停更，但是学习它的思想还是有必要的，项目地址：https://github.com/Netflix/eureka
+                浅谈Java中接口与抽象类的异同抽象类和接口这两个概念困扰了我许久，在我看来，接口与抽象类真的十分相似。期间也曾找过许许多多的资料，参考了各路大神的见解，也只能是简简单单地在语法上懂得两者的区别。硬着头皮，做出一波小总结。或许，学习了之后的知识，理解会更加深刻吧，奥利给！
+语法上的区别
+一个类最多只能继承一个抽象类，但是可以继承多个接口。
 
-本篇要点
-学习服务注册与发现的概念。
-学习Eureka基础中的两大组件Server和Client的概念。
-尝试Eureka单机和集群版的案例demo。
-
-Eureka基础知识什么是服务治理SpringClou...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/#more" class="article-more-link" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-SpringCloud学习笔记（一）基础环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"  >SpringCloud学习笔记（一）基础环境搭建</a>
-    </h1>
-  
-
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" >
-                
-                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（一）基础环境搭建" title="SpringCloud学习笔记（一）基础环境搭建">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                这里我们采用Maven构建项目，利用聚合工程管理包依赖，开发工具使用IDEA。
-建立父工程，完成环境搭建IDEA快速创建Maven工程，偏好设置
-创建聚合工程，选择maven工程，父工程创建。
-设置字符编码：File-&gt;Settings-&gt;Editor-&gt;FileEncodings-&gt;ProjectEncoding:UTF-8
-注解生效激活：Fil...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more" class="article-more-link" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-Mysql基础" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Mysql%E5%9F%BA%E7%A1%80/"  >Mysql基础</a>
-    </h1>
-  
-
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2021/10/16/Mysql%E5%9F%BA%E7%A1%80/" >
-                
-                <img src="https://zhanglc1998.github.io/images/mysql.jpg" alt="Mysql基础" title="Mysql基础">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                一、DDL操作数据库
-关键字理应大写，为便于记忆，本篇都采用小写形式。
-
-DDL(DATA Definition Language)：数据定义语言，用于定义数据库对象。
-1、创建数据库123456create database db1;	#创建一个数据库，名字叫mydbcreate database if not exists db2;	#如果db2不存在，则创建数据库d...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Mysql/" class="color1">Mysql</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2021/10/16/Mysql%E5%9F%BA%E7%A1%80/#more" class="article-more-link" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-Git使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Git%E4%BD%BF%E7%94%A8/"  >Git使用</a>
-    </h1>
-  
-
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2021/10/16/Git%E4%BD%BF%E7%94%A8/" >
-                
-                <img src="https://zhanglc1998.github.io/images/git.jpg" alt="Git使用" title="Git使用">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                [toc]
-Git工作流程
-Git工作区、暂存区和版本库
-工作区：就是你在电脑里能看到的目录。
-暂存区：英文叫 stage 或 index。一般存放在 .git 目录下的 index 文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）。
-版本库：工作区有一个隐藏目录 .git，这个不算工作区，而是 Git 的版本库。
-
-
-
-git add，暂存区...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/git/" class="color4">git</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2021/10/16/Git%E4%BD%BF%E7%94%A8/#more" class="article-more-link" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-Maven安装配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Maven%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"  >Maven安装配置</a>
-    </h1>
-  
-
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2021/10/16/Maven%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" >
-                
-                <img src="https://zhanglc1998.github.io/images/maven.jpg" alt="Maven安装配置" title="Maven安装配置">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                Windows环境Maven下载并配置下载并配置官网下载：https://maven.apache.org/download.cgi
-
-解压到E:\devSofts\maven目录下
-
-此时我们就可以进入该文件夹的bin目录下执行mvn -v命令了，为了全局使用这个命令，我们需要配置环境变量。
-新建系统变量MAVEN_HOME
-12MAVEN_HOMEE:\devSoft...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Maven/" class="color1">Maven</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2021/10/16/Maven%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/#more" class="article-more-link" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-JDK安装配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/JDK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"  >JDK安装配置</a>
-    </h1>
-  
-
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2021/10/16/JDK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" >
-                
-                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="JDK安装配置" title="JDK安装配置">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                JDK配置系统重装，由于要设置各种环境变量，怕之后还会遇到这个情况，特此记录一下。
-前提：已经下载完成jdk和jre文件。环境：Windows10
-进入配置界面此电脑-&gt;右键-&gt;属性
-
-高级系统设置-&gt;环境变量
-
-配置JAVA_HOME系统变量中：新建JAVA_HOME变量名：JAVA_HOME变量值：E:\Java\jdk1.8.0_231 （jdk文...
+接口中的变量声明默认是fina...
             </p>
         </div>
       
@@ -524,7 +156,7 @@ git add，暂存区...
 
         </ul>
         
-            <a href="/2021/10/16/JDK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/16/%E6%B5%85%E8%B0%88Java%E4%B8%AD%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%BC%82%E5%90%8C/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -532,14 +164,14 @@ git add，暂存区...
 
 
   
-    <article id="post-Linux部署Nginx" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java面向对象之接口与抽象类" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Linux%E9%83%A8%E7%BD%B2Nginx/"  >Linux部署Nginx</a>
+      <a class="article-title" href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/"  >Java面向对象之接口与抽象类</a>
     </h1>
   
 
@@ -549,16 +181,18 @@ git add，暂存区...
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/Linux%E9%83%A8%E7%BD%B2Nginx/" >
+            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/" >
                 
-                <img src="https://zhanglc1998.github.io/images/nginx.jpg" alt="Linux部署Nginx" title="Linux部署Nginx">
+                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java面向对象之接口与抽象类" title="Java面向对象之接口与抽象类">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                基本上参考这篇文章：https://blog.csdn.net/u012371097/article/details/82730890
-123456789# 下载nginxwget http://nginx.org/download/nginx-1.10.2.tar.gz# 下载opensslwget http://www.openssl.org/source/opens...
+                Java之接口（一）距离上篇已经过了好久啦，主要是临近期末，忙着复习，接口方面也看了好多天，查看了很多资料，层次不齐，最终查看了官方文档对于interface的介绍，才逐渐清晰一些。但是，毕竟是英文，看起来还是相对有些费劲的，但是看完一整篇下来，产生了一种英文进步飞快的错觉哈哈哈哈。
+话不多说，直接给一个形象生动的例子：
+
+There are a number of si...
             </p>
         </div>
       
@@ -574,13 +208,13 @@ git add，暂存区...
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Nginx/" class="color1">Nginx</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/Linux%E9%83%A8%E7%BD%B2Nginx/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -588,14 +222,14 @@ git add，暂存区...
 
 
   
-    <article id="post-JavaScript" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java面向对象之多态" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/JavaScript/"  >JavaScript</a>
+      <a class="article-title" href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%A4%9A%E6%80%81/"  >Java面向对象之多态</a>
     </h1>
   
 
@@ -605,17 +239,19 @@ git add，暂存区...
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/JavaScript/" >
+            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%A4%9A%E6%80%81/" >
                 
-                <img src="https://zhanglc1998.github.io/images/banner.jpg" alt="JavaScript" title="JavaScript">
+                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java面向对象之多态" title="Java面向对象之多态">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                一、JavaScript的实现JavaScript = ECMAScript+BOM+DOM
-ECMAScript：ECMA（欧洲计算机制造协会）指定的全新脚本语言，用于规定当时三足鼎立的三家Script语言（网景的JavaScript、Nombas的ScriptEase和微软的JScript），描述了该语言的语法和基本对象。
-在此基础上，JavaScript还拥有自己的...
+                Java多态之动态绑定上篇回顾：多态是面向对象程序设计非常重要的特性，它让程序拥有 更好的可读性和可扩展性。
+
+发生在继承关系中。
+需要子类重写父类的方法。
+父类类型的引用指向子类类型的对象。自始至终，多态都是对于方法而言，对于类中的成员变量，没有多态的说法。上篇说到：一个基类的引用变量接收不同子类的对象将会调用子类对应的方法，这其实就是动态绑定的过程。在理解动态绑定之前...
             </p>
         </div>
       
@@ -631,13 +267,13 @@ ECMAScript：ECMA（欧洲计算机制造协会）指定的全新脚本语言，
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/JavaScript/" class="color1">JavaScript</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/JavaScript/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%A4%9A%E6%80%81/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -645,14 +281,14 @@ ECMAScript：ECMA（欧洲计算机制造协会）指定的全新脚本语言，
 
 
   
-    <article id="post-Ajax" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java面向对象之继承" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Ajax/"  >Ajax</a>
+      <a class="article-title" href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/"  >Java面向对象之继承</a>
     </h1>
   
 
@@ -662,19 +298,22 @@ ECMAScript：ECMA（欧洲计算机制造协会）指定的全新脚本语言，
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/Ajax/" >
+            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/" >
                 
-                <img src="https://zhanglc1998.github.io/images/ajax.jpg" alt="Ajax" title="Ajax">
+                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java面向对象之继承" title="Java面向对象之继承">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                Ajax是啥Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。
-是一门在不重新加载整个页面的情况下，与服务器交换数据并更新部分网页的艺术，也就是通过在后台与服务器进行少量的数据交换，实现网页的异步更新。
-同步交互与异步交互
-【同步】：客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。
-【异步】：客户端...
+                Java面向对象之继承
+继承是面向对象的第二大特征，是实现软件复用的重要手段，也是面向对象的基石。接下的篇目将会围绕着继承这一特征展开探究。
+
+引言 继承这个概念，在我们生活中也存在。
+
+就比如，老王和他的儿子小王是父亲与儿子的关系，小王以后是要继承老王的衣钵的！
+很显然，小王很多方面都和老王一样，有一样的姓氏，一样的地址……
+老王教会小王很多为人处世的道理，小王在很多行...
             </p>
         </div>
       
@@ -690,13 +329,377 @@ ECMAScript：ECMA（欧洲计算机制造协会）指定的全新脚本语言，
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/ajax/" class="color5">ajax</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/Ajax/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/#more" class="article-more-link" >more&gt;&gt;</a>
+        
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article id="post-Java面向对象之封装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/"  >Java面向对象之封装</a>
+    </h1>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+        <div class="article-img">
+            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/" >
+                
+                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java面向对象之封装" title="Java面向对象之封装">
+                
+            </a>
+        </div>
+        <div class="article-feed">
+            <p>
+                Java面向对象之封装（一）对于封装的概念，我总觉得自己还是挺了解的，但是真要我说，还真说不出个啥来。我只能默默地通过身边的例子加上书本理论完善我对封装的认识。
+
+就比如，我们在玩游戏的时候，我们只能通过完成指定任务获得金币，并不能直接修改金币的值，作为玩家的我们，如果轻易就能修改机密，那岂不是乱套啦。设计者明显不想让我们这么做，他们允许我们享受游戏，但是这些禁忌碰不得。...
+            </p>
+        </div>
+      
+        
+    </div>
+    <footer class="article-footer">
+        
+        <ul class="article-footer-menu">
+            
+                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+  </li>
+
+        </ul>
+        
+            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/#more" class="article-more-link" >more&gt;&gt;</a>
+        
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article id="post-Java数组" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/16/Java%E6%95%B0%E7%BB%84/"  >Java数组</a>
+    </h1>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+        <div class="article-img">
+            <a href="/2021/10/16/Java%E6%95%B0%E7%BB%84/" >
+                
+                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java数组" title="Java数组">
+                
+            </a>
+        </div>
+        <div class="article-feed">
+            <p>
+                数组定义及初始化
+数组这玩意是一种用于存放数据最常见数据结构。
+
+数组的的概念及注意点
+数组要求所有的数组元素具有相同的数据类型，且只能存在一种数据类型，要多专一有多专一。
+数据类型既可以是基本类型也可以是引用类型，类里虽然有不同对象，但都属于同一类，也可存于数组。
+数组就是一种引用类型。
+数组一旦初始化完成，长度就已经确定，所占内存空间也被固定且不能改变，把数据删除也没...
+            </p>
+        </div>
+      
+        
+    </div>
+    <footer class="article-footer">
+        
+        <ul class="article-footer-menu">
+            
+                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+  </li>
+
+        </ul>
+        
+            <a href="/2021/10/16/Java%E6%95%B0%E7%BB%84/#more" class="article-more-link" >more&gt;&gt;</a>
+        
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article id="post-Java基础语法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/16/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"  >Java基础语法</a>
+    </h1>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+        <div class="article-img">
+            <a href="/2021/10/16/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" >
+                
+                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java基础语法" title="Java基础语法">
+                
+            </a>
+        </div>
+        <div class="article-feed">
+            <p>
+                Java基础语法（一）
+Java基础语法部分与c++及c语言大同小异，本篇列举我容易搞混的点。
+
+Java命名规范
+规范这种东西，当然是能遵守就遵守，你不遵守，虽然不会怎么样，但是容易被喷。毕竟代码都是给别人看的，可读性很重要。
+
+
+Java对大小写很敏感，hello和Hello不同。
+英文一定要对应意思！！！不然别人真的看了会笑。拼音也就自己看的懂，随便取个a过一段时间...
+            </p>
+        </div>
+      
+        
+    </div>
+    <footer class="article-footer">
+        
+        <ul class="article-footer-menu">
+            
+                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+  </li>
+
+        </ul>
+        
+            <a href="/2021/10/16/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/#more" class="article-more-link" >more&gt;&gt;</a>
+        
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article id="post-SpringCloud学习笔记（十一）服务网关Gateway" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3Gateway/"  >SpringCloud学习笔记（十一）服务网关Gateway</a>
+    </h1>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+        <div class="article-img">
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3Gateway/" >
+                
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（十一）服务网关Gateway" title="SpringCloud学习笔记（十一）服务网关Gateway">
+                
+            </a>
+        </div>
+        <div class="article-feed">
+            <p>
+                SpringCloud GatewaySpringCloud Gateway概述是什么？
+Spring Cloud Gateway is an intelligent and programmable router based on Project Reactor.
+官网：https://spring.io/projects/spring-cloud-gateway
+
+
+...
+            </p>
+        </div>
+      
+        
+    </div>
+    <footer class="article-footer">
+        
+        <ul class="article-footer-menu">
+            
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
+      
+  </li>
+
+        </ul>
+        
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3Gateway/#more" class="article-more-link" >more&gt;&gt;</a>
+        
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article id="post-SpringCloud学习笔记（十）Hystrix断路器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89Hystrix%E6%96%AD%E8%B7%AF%E5%99%A8/"  >SpringCloud学习笔记（十）Hystrix断路器</a>
+    </h1>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+        <div class="article-img">
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89Hystrix%E6%96%AD%E8%B7%AF%E5%99%A8/" >
+                
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（十）Hystrix断路器" title="SpringCloud学习笔记（十）Hystrix断路器">
+                
+            </a>
+        </div>
+        <div class="article-feed">
+            <p>
+                本篇要点
+简单了解分布式系统目前面临的问题。
+简单了解Hystrix服务降级、熔断、限流的概念。
+实战服务降级和服务熔断。
+理解Hystrix的工作流程。
+实战使用Hystrix图形化监控页面。
+
+分布式系统面临的问题服务雪崩：多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其他的微服务，这就是所谓的“扇出”。如果扇出的链路上某个微服...
+            </p>
+        </div>
+      
+        
+    </div>
+    <footer class="article-footer">
+        
+        <ul class="article-footer-menu">
+            
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
+      
+  </li>
+
+        </ul>
+        
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89Hystrix%E6%96%AD%E8%B7%AF%E5%99%A8/#more" class="article-more-link" >more&gt;&gt;</a>
+        
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article id="post-SpringCloud学习笔记（九）OpenFeign服务调用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/"  >SpringCloud学习笔记（九）OpenFeign服务调用</a>
+    </h1>
+  
+
+          
+      </header>
+    
+    <div class="article-entry " itemprop="articleBody">
+      
+        <div class="article-img">
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/" >
+                
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（九）OpenFeign服务调用" title="SpringCloud学习笔记（九）OpenFeign服务调用">
+                
+            </a>
+        </div>
+        <div class="article-feed">
+            <p>
+                OpenFeign服务接口调用
+官网： https://docs.spring.io/spring-cloud-openfeign/docs/2.2.5.RELEASE/reference/html/
+Github：https://github.com/spring-cloud/spring-cloud-openfeign
+
+本篇要点
+简单介绍Feign与OpenFeig...
+            </p>
+        </div>
+      
+        
+    </div>
+    <footer class="article-footer">
+        
+        <ul class="article-footer-menu">
+            
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
+      
+  </li>
+
+        </ul>
+        
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>

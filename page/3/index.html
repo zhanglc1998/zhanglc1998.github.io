@@ -105,14 +105,14 @@
       <div class="outer">
         <section id="main" class="body-wrap">
   
-    <article id="post-JDBC" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringCloud学习笔记（八）Ribbon负载均衡" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/JDBC/"  >JDBC</a>
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"  >SpringCloud学习笔记（八）Ribbon负载均衡</a>
     </h1>
   
 
@@ -122,16 +122,23 @@
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/JDBC/" >
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" >
                 
-                <img src="https://zhanglc1998.github.io/images/banner.jpg" alt="JDBC" title="JDBC">
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（八）Ribbon负载均衡" title="SpringCloud学习笔记（八）Ribbon负载均衡">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                JDBC概述Java Database Connectivity：数据库连接，是一种可执行SQL语句的API。
-JDBC是面向接口编程的典型应用：关系型数据库系统类型多样（诸如MySQL，DB2，Oracle），为了实现统一简化开发，Sun公司制定这套标准的API（接口），不同的厂商提供实现，使得依据JDBC开发的数据库程序可以跨平台执行，使用时只需要不同数据库的驱动程序...
+                本篇要点
+介绍Ribbon的基本功能。
+介绍负载均衡的相关概念。
+演示Ribbon负载均衡。
+学习Ribbon默认自带的负载均衡规则。
+学习轮询算法原理。
+
+Ribbon是什么？Ribbon是Netflix发布的开源项目，主要功能是提供客户端的软件负载均衡算法和服务调用，将Netflix的中间层服务连接在一起。
+Ribbon客户端组件提供一系列完善的配置项如连接超时，重试...
             </p>
         </div>
       
@@ -141,19 +148,19 @@ JDBC是面向接口编程的典型应用：关系型数据库系统类型多样�
         
         <ul class="article-footer-menu">
             
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/JDBC/" class="color5">JDBC</a>
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/JDBC/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -161,14 +168,14 @@ JDBC是面向接口编程的典型应用：关系型数据库系统类型多样�
 
 
   
-    <article id="post-浅谈Java中接口与抽象类的异同" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringCloud学习笔记（七）三个注册中心异同点" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/%E6%B5%85%E8%B0%88Java%E4%B8%AD%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%BC%82%E5%90%8C/"  >浅谈Java中接口与抽象类的异同</a>
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/"  >SpringCloud学习笔记（七）三个注册中心异同点</a>
     </h1>
   
 
@@ -178,19 +185,57 @@ JDBC是面向接口编程的典型应用：关系型数据库系统类型多样�
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/%E6%B5%85%E8%B0%88Java%E4%B8%AD%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%BC%82%E5%90%8C/" >
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/" >
                 
-                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="浅谈Java中接口与抽象类的异同" title="浅谈Java中接口与抽象类的异同">
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（七）三个注册中心异同点" title="SpringCloud学习笔记（七）三个注册中心异同点">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                浅谈Java中接口与抽象类的异同抽象类和接口这两个概念困扰了我许久，在我看来，接口与抽象类真的十分相似。期间也曾找过许许多多的资料，参考了各路大神的见解，也只能是简简单单地在语法上懂得两者的区别。硬着头皮，做出一波小总结。或许，学习了之后的知识，理解会更加深刻吧，奥利给！
-语法上的区别
-一个类最多只能继承一个抽象类，但是可以继承多个接口。
+                
 
-接口中的变量声明默认是fina...
+
+Feature
+euerka
+Consul
+zookeeper
+
+
+
+服务健康检查
+可配支持
+服务状态，内存，硬盘等
+(弱)长连接，keepalive
+
+
+多数据中心
+—
+支持
+—
+
+
+kv 存储服务
+—
+支持
+支持
+
+
+一致性
+—
+raft
+paxos
+
+
+CAP
+AP
+CP
+CP
+
+
+使用接口(多语言能力)
+http（sidecar）
+支持 http 和 dns...
             </p>
         </div>
       
@@ -200,19 +245,19 @@ JDBC是面向接口编程的典型应用：关系型数据库系统类型多样�
         
         <ul class="article-footer-menu">
             
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/%E6%B5%85%E8%B0%88Java%E4%B8%AD%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%BC%82%E5%90%8C/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -220,14 +265,14 @@ JDBC是面向接口编程的典型应用：关系型数据库系统类型多样�
 
 
   
-    <article id="post-Java面向对象之接口与抽象类" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringCloud学习笔记（六）Consul服务注册与发现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/"  >Java面向对象之接口与抽象类</a>
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89Consul%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/"  >SpringCloud学习笔记（六）Consul服务注册与发现</a>
     </h1>
   
 
@@ -237,18 +282,22 @@ JDBC是面向接口编程的典型应用：关系型数据库系统类型多样�
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/" >
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89Consul%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" >
                 
-                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java面向对象之接口与抽象类" title="Java面向对象之接口与抽象类">
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（六）Consul服务注册与发现" title="SpringCloud学习笔记（六）Consul服务注册与发现">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                Java之接口（一）距离上篇已经过了好久啦，主要是临近期末，忙着复习，接口方面也看了好多天，查看了很多资料，层次不齐，最终查看了官方文档对于interface的介绍，才逐渐清晰一些。但是，毕竟是英文，看起来还是相对有些费劲的，但是看完一整篇下来，产生了一种英文进步飞快的错觉哈哈哈哈。
-话不多说，直接给一个形象生动的例子：
+                Consul简介
+https://www.consul.io/docs/intro
 
-There are a number of si...
+Consul是一套开源的分布式服务发现和配置管理系统，由HashiCorp公司用go语言开发。
+提供了微服务系统中的服务治理、配置中心、控制总线等功能，他们可以单独使用，也可一起使用构建全方位的服务网格。 总之，Consul提供了一种完整的服务网格解决方案。
+关键特性：
+
+Service...
             </p>
         </div>
       
@@ -258,19 +307,19 @@ There are a number of si...
         
         <ul class="article-footer-menu">
             
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89Consul%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -278,14 +327,14 @@ There are a number of si...
 
 
   
-    <article id="post-Java面向对象之多态" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringCloud学习笔记（五）Zookeeper服务注册与发现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%A4%9A%E6%80%81/"  >Java面向对象之多态</a>
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/"  >SpringCloud学习笔记（五）Zookeeper服务注册与发现</a>
     </h1>
   
 
@@ -295,19 +344,20 @@ There are a number of si...
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%A4%9A%E6%80%81/" >
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" >
                 
-                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java面向对象之多态" title="Java面向对象之多态">
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（五）Zookeeper服务注册与发现" title="SpringCloud学习笔记（五）Zookeeper服务注册与发现">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                Java多态之动态绑定上篇回顾：多态是面向对象程序设计非常重要的特性，它让程序拥有 更好的可读性和可扩展性。
+                Zookeeper的服务注册与发现安装Zookeeper环境
+ Zookeeper的3.4.9
 
-发生在继承关系中。
-需要子类重写父类的方法。
-父类类型的引用指向子类类型的对象。自始至终，多态都是对于方法而言，对于类中的成员变量，没有多态的说法。上篇说到：一个基类的引用变量接收不同子类的对象将会调用子类对应的方法，这其实就是动态绑定的过程。在理解动态绑定之前...
+Windows和Linux环境皆可，这里介绍一下使用Docker启动Zookeeper。
+直接看这篇文章就好了：Docker安装Zookeeper以及Zk常用命令
+创建Zk服务提供者模块引入依赖12345&lt;!--SpringBoot整合zookeeper客户端--&gt...
             </p>
         </div>
       
@@ -317,19 +367,19 @@ There are a number of si...
         
         <ul class="article-footer-menu">
             
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%A4%9A%E6%80%81/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -337,14 +387,14 @@ There are a number of si...
 
 
   
-    <article id="post-Java面向对象之继承" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringCloud学习笔记（四）Eureka的自我保护机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/"  >Java面向对象之继承</a>
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Eureka%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/"  >SpringCloud学习笔记（四）Eureka的自我保护机制</a>
     </h1>
   
 
@@ -354,22 +404,21 @@ There are a number of si...
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/" >
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Eureka%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" >
                 
-                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java面向对象之继承" title="Java面向对象之继承">
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（四）Eureka的自我保护机制" title="SpringCloud学习笔记（四）Eureka的自我保护机制">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                Java面向对象之继承
-继承是面向对象的第二大特征，是实现软件复用的重要手段，也是面向对象的基石。接下的篇目将会围绕着继承这一特征展开探究。
+                Eureka的自我保护机制本篇要点
+介绍Eureka的自我保护机制。
+介绍CAP原则。
+介绍为什么需要自我保护。
+介绍如何禁止自我保护机制
 
-引言 继承这个概念，在我们生活中也存在。
-
-就比如，老王和他的儿子小王是父亲与儿子的关系，小王以后是要继承老王的衣钵的！
-很显然，小王很多方面都和老王一样，有一样的姓氏，一样的地址……
-老王教会小王很多为人处世的道理，小王在很多行...
+Eureka的自我保护保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据，也就是不会注销任何微...
             </p>
         </div>
       
@@ -379,19 +428,19 @@ There are a number of si...
         
         <ul class="article-footer-menu">
             
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Eureka%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -399,14 +448,14 @@ There are a number of si...
 
 
   
-    <article id="post-Java面向对象之封装" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringCloud学习笔记（三）集群信息获取-服务列表信息获取" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/"  >Java面向对象之封装</a>
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/"  >SpringCloud学习笔记（三）集群信息获取+服务列表信息获取</a>
     </h1>
   
 
@@ -416,17 +465,20 @@ There are a number of si...
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/" >
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" >
                 
-                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java面向对象之封装" title="Java面向对象之封装">
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（三）集群信息获取+服务列表信息获取" title="SpringCloud学习笔记（三）集群信息获取+服务列表信息获取">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                Java面向对象之封装（一）对于封装的概念，我总觉得自己还是挺了解的，但是真要我说，还真说不出个啥来。我只能默默地通过身边的例子加上书本理论完善我对封装的认识。
+                本篇要点
+介绍Eureka管理界面主机名和访问ip信息提示修改。
+介绍获取当前注册中心服务列表，以及获取每个服务的实例列表的方法。
 
-就比如，我们在玩游戏的时候，我们只能通过完成指定任务获得金币，并不能直接修改金币的值，作为玩家的我们，如果轻易就能修改机密，那岂不是乱套啦。设计者明显不想让我们这么做，他们允许我们享受游戏，但是这些禁忌碰不得。...
+Actuator微服务信息完善前提除了eureka依赖之外，确保已经引入以下依赖：
+12345678&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/grou...
             </p>
         </div>
       
@@ -436,19 +488,19 @@ There are a number of si...
         
         <ul class="article-footer-menu">
             
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96-%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -456,14 +508,14 @@ There are a number of si...
 
 
   
-    <article id="post-Java数组" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringCloud学习笔记（二）Eureka服务注册与发现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Java%E6%95%B0%E7%BB%84/"  >Java数组</a>
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/"  >SpringCloud学习笔记（二）Eureka服务注册与发现</a>
     </h1>
   
 
@@ -473,22 +525,23 @@ There are a number of si...
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/Java%E6%95%B0%E7%BB%84/" >
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" >
                 
-                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java数组" title="Java数组">
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（二）Eureka服务注册与发现" title="SpringCloud学习笔记（二）Eureka服务注册与发现">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                数组定义及初始化
-数组这玩意是一种用于存放数据最常见数据结构。
+                Eureka服务注册与发现
+Eureka2.0已经停更，但是学习它的思想还是有必要的，项目地址：https://github.com/Netflix/eureka
 
-数组的的概念及注意点
-数组要求所有的数组元素具有相同的数据类型，且只能存在一种数据类型，要多专一有多专一。
-数据类型既可以是基本类型也可以是引用类型，类里虽然有不同对象，但都属于同一类，也可存于数组。
-数组就是一种引用类型。
-数组一旦初始化完成，长度就已经确定，所占内存空间也被固定且不能改变，把数据删除也没...
+本篇要点
+学习服务注册与发现的概念。
+学习Eureka基础中的两大组件Server和Client的概念。
+尝试Eureka单机和集群版的案例demo。
+
+Eureka基础知识什么是服务治理SpringClou...
             </p>
         </div>
       
@@ -498,19 +551,19 @@ There are a number of si...
         
         <ul class="article-footer-menu">
             
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/Java%E6%95%B0%E7%BB%84/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>
@@ -518,14 +571,14 @@ There are a number of si...
 
 
   
-    <article id="post-Java基础语法" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringCloud学习笔记（一）基础环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"  >Java基础语法</a>
+      <a class="article-title" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"  >SpringCloud学习笔记（一）基础环境搭建</a>
     </h1>
   
 
@@ -535,23 +588,19 @@ There are a number of si...
     <div class="article-entry " itemprop="articleBody">
       
         <div class="article-img">
-            <a href="/2021/10/16/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" >
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" >
                 
-                <img src="https://zhanglc1998.github.io/images/java.jpg" alt="Java基础语法" title="Java基础语法">
+                <img src="https://zhanglc1998.github.io/images/springcloud.jpg" alt="SpringCloud学习笔记（一）基础环境搭建" title="SpringCloud学习笔记（一）基础环境搭建">
                 
             </a>
         </div>
         <div class="article-feed">
             <p>
-                Java基础语法（一）
-Java基础语法部分与c++及c语言大同小异，本篇列举我容易搞混的点。
-
-Java命名规范
-规范这种东西，当然是能遵守就遵守，你不遵守，虽然不会怎么样，但是容易被喷。毕竟代码都是给别人看的，可读性很重要。
-
-
-Java对大小写很敏感，hello和Hello不同。
-英文一定要对应意思！！！不然别人真的看了会笑。拼音也就自己看的懂，随便取个a过一段时间...
+                这里我们采用Maven构建项目，利用聚合工程管理包依赖，开发工具使用IDEA。
+建立父工程，完成环境搭建IDEA快速创建Maven工程，偏好设置
+创建聚合工程，选择maven工程，父工程创建。
+设置字符编码：File-&gt;Settings-&gt;Editor-&gt;FileEncodings-&gt;ProjectEncoding:UTF-8
+注解生效激活：Fil...
             </p>
         </div>
       
@@ -561,19 +610,19 @@ Java对大小写很敏感，hello和Hello不同。
         
         <ul class="article-footer-menu">
             
-                <li><i class="fa fa-calendar"></i>2021-10-16</li>
+                <li><i class="fa fa-calendar"></i>2021-10-15</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
+    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
       
   </li>
 
         </ul>
         
-            <a href="/2021/10/16/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/#more" class="article-more-link" >more&gt;&gt;</a>
+            <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more" class="article-more-link" >more&gt;&gt;</a>
         
     </footer>
   </div>

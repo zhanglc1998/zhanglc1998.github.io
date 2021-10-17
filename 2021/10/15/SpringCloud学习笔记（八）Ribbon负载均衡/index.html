@@ -11,15 +11,15 @@
   <meta name="description" content="本篇要点 介绍Ribbon的基本功能。 介绍负载均衡的相关概念。 演示Ribbon负载均衡。 学习Ribbon默认自带的负载均衡规则。 学习轮询算法原理。  Ribbon是什么？Ribbon是Netflix发布的开源项目，主要功能是提供客户端的软件负载均衡算法和服务调用，将Netflix的中间层服务连接在一起。 Ribbon客户端组件提供一系列完善的配置项如连接超时，重试等。简单的说，就是在配置文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringCloud学习笔记（八）Ribbon负载均衡">
-<meta property="og:url" content="https://zhanglc1998.github.io/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/index.html">
+<meta property="og:url" content="https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/index.html">
 <meta property="og:site_name" content="ZhangLichao">
 <meta property="og:description" content="本篇要点 介绍Ribbon的基本功能。 介绍负载均衡的相关概念。 演示Ribbon负载均衡。 学习Ribbon默认自带的负载均衡规则。 学习轮询算法原理。  Ribbon是什么？Ribbon是Netflix发布的开源项目，主要功能是提供客户端的软件负载均衡算法和服务调用，将Netflix的中间层服务连接在一起。 Ribbon客户端组件提供一系列完善的配置项如连接超时，重试等。简单的说，就是在配置文">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（八）Ribbon负载均衡/image-20201121120147615.png">
 <meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（八）Ribbon负载均衡/image-20201121125932393.png">
 <meta property="og:image" content="f:/桌面文件/JavaBlog/微服务学习/img/SpringCloud学习笔记（八）Ribbon负载均衡/image-20201121133808628.png">
-<meta property="article:published_time" content="2021-10-16T03:33:15.000Z">
-<meta property="article:modified_time" content="2021-10-16T08:07:48.046Z">
+<meta property="article:published_time" content="2021-10-15T03:33:15.000Z">
+<meta property="article:modified_time" content="2021-10-17T01:16:07.376Z">
 <meta property="article:author" content="ZhangLichao">
 <meta property="article:tag" content="SpringCloud">
 <meta name="twitter:card" content="summary">
@@ -125,7 +125,7 @@
       <ul>
           
         <li>
-          <i class="fa fa-calendar"></i>  2021-10-16
+          <i class="fa fa-calendar"></i>  2021-10-15
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -213,8 +213,8 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2021年10月16日 16:07</p>
-        <p>原始链接： <a class="post-url" href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" title="SpringCloud学习笔记（八）Ribbon负载均衡">https://zhanglc1998.github.io/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</a></p>
+        <p>最后更新： 2021年10月17日 09:16</p>
+        <p>原始链接： <a class="post-url" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" title="SpringCloud学习笔记（八）Ribbon负载均衡">https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</a></p>
         <footer>
             <a href="https://zhanglc1998.github.io">
                 <img src="/images/touxiang.jpg" alt="ZhangLichao">
@@ -271,7 +271,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhanglc1998.github.io/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/&title=《SpringCloud学习笔记（八）Ribbon负载均衡》 — ZhangLichao&pic=images/springcloud.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/&title=《SpringCloud学习笔记（八）Ribbon负载均衡》 — ZhangLichao&pic=images/springcloud.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -281,22 +281,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhanglc1998.github.io/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/&title=《SpringCloud学习笔记（八）Ribbon负载均衡》 — ZhangLichao&source=" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/&title=《SpringCloud学习笔记（八）Ribbon负载均衡》 — ZhangLichao&source=" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhanglc1998.github.io/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringCloud学习笔记（八）Ribbon负载均衡》 — ZhangLichao&url=https://zhanglc1998.github.io/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/&via=https://zhanglc1998.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringCloud学习笔记（八）Ribbon负载均衡》 — ZhangLichao&url=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/&via=https://zhanglc1998.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhanglc1998.github.io/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -306,7 +306,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhanglc1998.github.io/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -338,7 +338,7 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89OpenFeign%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
 
       <span class="article-nav-title">
         <i class="fa fa-hand-o-left" aria-hidden="true"></i>
@@ -349,7 +349,7 @@
     </a>
   
   
-    <a href="/2021/10/16/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
       <span class="article-nav-title">SpringCloud学习笔记（七）三个注册中心异同点</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
