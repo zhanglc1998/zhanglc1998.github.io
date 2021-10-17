@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mysql基础 | ZhangLichao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="张丽超个人博客" />
+  
+  <meta name="description" content="一、DDL操作数据库 关键字理应大写，为便于记忆，本篇都采用小写形式。  DDL(DATA Definition Language)：数据定义语言，用于定义数据库对象。 1、创建数据库123456create database db1;	#创建一个数据库，名字叫mydbcreate database if not exists db2;	#如果db2不存在，则创建数据库db2create data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql基础">
+<meta property="og:url" content="https://zhanglc1998.github.io/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="ZhangLichao">
+<meta property="og:description" content="一、DDL操作数据库 关键字理应大写，为便于记忆，本篇都采用小写形式。  DDL(DATA Definition Language)：数据定义语言，用于定义数据库对象。 1、创建数据库123456create database db1;	#创建一个数据库，名字叫mydbcreate database if not exists db2;	#如果db2不存在，则创建数据库db2create data">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.ax1x.com/2020/03/04/3oXs0S.png">
+<meta property="og:image" content="c:/Users/13327/AppData/Roaming/Typora/typora-user-images/image-20200306144034658.png">
+<meta property="article:published_time" content="2020-03-11T03:24:35.000Z">
+<meta property="article:modified_time" content="2021-10-17T01:25:47.725Z">
+<meta property="article:author" content="ZhangLichao">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.ax1x.com/2020/03/04/3oXs0S.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">ZhangLichao&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/touxiang.jpg" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        ZhangLichao&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a   ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a   ">
+                            <i class="fa fa-weixin fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Mysql基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Mysql基础
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-03-11
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="一、DDL操作数据库"><a href="#一、DDL操作数据库" class="headerlink" title="一、DDL操作数据库"></a>一、DDL操作数据库</h1><blockquote>
+<p>关键字理应大写，为便于记忆，本篇都采用小写形式。</p>
+</blockquote>
+<p>DDL(DATA Definition Language)：数据定义语言，用于定义数据库对象。</p>
+<h2 id="1、创建数据库"><a href="#1、创建数据库" class="headerlink" title="1、创建数据库"></a>1、创建数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create database db1;	#创建一个数据库，名字叫mydb</span><br><span class="line">create database if not exists db2;	#如果db2不存在，则创建数据库db2</span><br><span class="line">create database db3 character set gbk;	#创建数据库db3并制定字符集为gbk</span><br><span class="line"></span><br><span class="line">-- 综合：如果db4不存在，就创建它，并且设置字符集为utf8（！不是utf-8）</span><br><span class="line">create database if not exists db4 character set utf8;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、查看数据库"><a href="#2、查看数据库" class="headerlink" title="2、查看数据库"></a>2、查看数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show databases;			# 查询所有数据库的名称</span><br><span class="line">show create database db1; #查询已创建数据库db1的字符集</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、修改数据库"><a href="#3、修改数据库" class="headerlink" title="3、修改数据库"></a>3、修改数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter database db2 character set utf8;	#修改数据库db2字符集为utf8</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、删除数据库"><a href="#4、删除数据库" class="headerlink" title="4、删除数据库"></a>4、删除数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop database db4;		#删除数据库db4</span><br><span class="line">drop database if exists db3;	#判断是否存在并删除db3</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、使用数据库"><a href="#5、使用数据库" class="headerlink" title="5、使用数据库"></a>5、使用数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use db1;	# 使用数据库db1</span><br><span class="line">select database(); #查看正在使用的数据库</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、DDL操作数据表"><a href="#二、DDL操作数据表" class="headerlink" title="二、DDL操作数据表"></a>二、DDL操作数据表</h1><p>在使用某个数据库的前提下，才可以操作库里面的表结构。</p>
+<h2 id="1、创建表"><a href="#1、创建表" class="headerlink" title="1、创建表"></a>1、创建表</h2><h3 id="建表格式"><a href="#建表格式" class="headerlink" title="建表格式"></a>建表格式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">    列名1 数据类型1，## 此处可添加字段注释</span><br><span class="line">    列名2 数据类型2，## 此处可添加字段注释</span><br><span class="line">    ...</span><br><span class="line">    列名n 数据类型n  ## 此处可添加字段注释</span><br><span class="line">); ## 最后一列列不需要加逗号</span><br></pre></td></tr></table></figure>
+
+<p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table student (</span><br><span class="line">	id int, 	  -- 编号</span><br><span class="line">	NAME varchar(20), -- 姓名</span><br><span class="line">	gender char(8),	  -- 性别</span><br><span class="line">	birthday date 	  -- 生日</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL数据类型"><a href="#MySQL数据类型" class="headerlink" title="MySQL数据类型"></a>MySQL数据类型</h3><blockquote>
+<p>数据类型有许多，以下为几个比较基础重要的。</p>
+</blockquote>
+<h3 id="文本相关"><a href="#文本相关" class="headerlink" title="文本相关"></a>文本相关</h3><ul>
+<li>varchar(m)：可变长度字符串 ，<strong>使用几个字符就占用几个</strong>，m为0-65535之间。</li>
+<li>char(m)：定长字符串，<strong>无论使用几个字符都将占满全部</strong>，多余的以空字符补充，m为0-255之间。</li>
+</ul>
+<blockquote>
+<p>关于char和varchar推荐看这篇：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lovemysea/article/details/82315514">char与varchar类型区别的深度剖析</a></p>
+</blockquote>
+<h3 id="数相关"><a href="#数相关" class="headerlink" title="数相关"></a>数相关</h3><ul>
+<li>int：整数类型。</li>
+<li>double：双精度浮点数类型。</li>
+<li>float：单精度浮点数类型。</li>
+</ul>
+<h3 id="时间相关"><a href="#时间相关" class="headerlink" title="时间相关"></a>时间相关</h3><ul>
+<li><p>date：日期类型，只包含年月日：<code>yyyy-MM-dd</code>。</p>
+</li>
+<li><p>time：时间类型，只包含时分秒：<code>HH:mm:ss</code>。</p>
+</li>
+<li><p>datetime：日期和时间类型都有，包含年月日时分秒：<code>yyyy-MM-dd HH:mm:ss</code>。</p>
+</li>
+<li><p>timestamp：时间戳 格式和上相同，如果不给这个字段赋值，则自动用系统默认时间赋值。</p>
+</li>
+</ul>
+<h3 id="复制表"><a href="#复制表" class="headerlink" title="复制表"></a>复制表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table new_stu like old_stu;      # 复制表的操作</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、查看表"><a href="#2、查看表" class="headerlink" title="2、查看表"></a>2、查看表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables;   # 查询该数据库中所有的表名称</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc student;	  # 查询表student的结构</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.ax1x.com/2020/03/04/3oXs0S.png" alt="3oXs0S.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create table student; #查看student的创建表 SQL 语句</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、删除表"><a href="#3、删除表" class="headerlink" title="3、删除表"></a>3、删除表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop table student;				#删除表student</span><br><span class="line">drop table if exists student;	#判断student是否存在，并删除</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、修改表"><a href="#4、修改表" class="headerlink" title="4、修改表"></a>4、修改表</h2><h3 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table student rename to stu;  # 把student表改名为stu</span><br><span class="line">rename table student to stu;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改字符集"><a href="#修改字符集" class="headerlink" title="修改字符集"></a>修改字符集</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu character set gbk;   # 修改字符集为gbk</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加表列"><a href="#添加表列" class="headerlink" title="添加表列"></a>添加表列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu add address varchar(20);  # 增加一列，列名为address，数据类型varchar</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改列类型"><a href="#修改列类型" class="headerlink" title="修改列类型"></a>修改列类型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu modify address char(10);  # 修改address的数据类型，改为char</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改列名"><a href="#修改列名" class="headerlink" title="修改列名"></a>修改列名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu change address addr char(10);  #修改列名为addr，数据类型改为char</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除列"><a href="#删除列" class="headerlink" title="删除列"></a>删除列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu drop addr; 		# 删除addr列</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p> DQL(Data Query Language)：数据查询语言，用以查询数据库中表的记录(数据)。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> exam(</span><br><span class="line">	id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,</span><br><span class="line">	NAME <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	chinese <span class="keyword">DOUBLE</span>,</span><br><span class="line">	math <span class="keyword">DOUBLE</span>,</span><br><span class="line">	english <span class="keyword">DOUBLE</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> exam <span class="keyword">VALUES</span>(<span class="keyword">NULL</span>,<span class="string">&#x27;关羽&#x27;</span>,<span class="number">85</span>,<span class="number">76</span>,<span class="number">70</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> exam <span class="keyword">VALUES</span>(<span class="keyword">NULL</span>,<span class="string">&#x27;张飞&#x27;</span>,<span class="number">70</span>,<span class="number">75</span>,<span class="number">70</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> exam <span class="keyword">VALUES</span>(<span class="keyword">NULL</span>,<span class="string">&#x27;赵云&#x27;</span>,<span class="number">90</span>,<span class="number">65</span>,<span class="number">95</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> exam <span class="keyword">VALUES</span> (<span class="keyword">NULL</span>,<span class="string">&#x27;黄忠&#x27;</span>,<span class="keyword">NULL</span>,<span class="number">88</span>,<span class="number">76</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\13327\AppData\Roaming\Typora\typora-user-images\image-20200306144034658.png" alt="image-20200306144034658"></p>
+<h1 id="一、基本查询"><a href="#一、基本查询" class="headerlink" title="一、基本查询"></a>一、基本查询</h1><blockquote>
+<p> select关键字后面跟着的是字段名，*表示查询结果显示所有字段。</p>
+</blockquote>
+<h2 id="1、查询所有信息与指定信息"><a href="#1、查询所有信息与指定信息" class="headerlink" title="1、查询所有信息与指定信息"></a>1、查询所有信息与指定信息</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询表中所有学生的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> exam;</span><br><span class="line"><span class="keyword">SELECT</span> id,NAME,chinese,math,english <span class="keyword">FROM</span> exam;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表中所有学生的姓名和英语成绩</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,english <span class="keyword">FROM</span> exam;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、清除重复值"><a href="#2、清除重复值" class="headerlink" title="2、清除重复值"></a>2、清除重复值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 过滤重复的英语成绩</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> english <span class="keyword">FROM</span> exam;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、查询结果参与运算"><a href="#3、查询结果参与运算" class="headerlink" title="3、查询结果参与运算"></a>3、查询结果参与运算</h2><blockquote>
+<p>参与运算的需要是数值类型。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 计算总分并以score显示 也可省去 AS (如果有null值，结果也会为null，可用ifnull(x,y))</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,math<span class="operator">+</span>chinese<span class="operator">+</span>english <span class="keyword">AS</span> score <span class="keyword">FROM</span> exam;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有成绩的总和，如果null用0代替。</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,IFNULL(math,<span class="number">0</span>)<span class="operator">+</span>IFNULL(chinese,<span class="number">0</span>)<span class="operator">+</span>IFNULL(english,<span class="number">0</span>) <span class="keyword">AS</span> score <span class="keyword">FROM</span> exam;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="二、条件查询"><a href="#二、条件查询" class="headerlink" title="二、条件查询"></a>二、条件查询</h1><blockquote>
+<p>SELECT 字段名 FROM 表名 WHERE 条件</p>
+</blockquote>
+<h2 id="1、比较运算符"><a href="#1、比较运算符" class="headerlink" title="1、比较运算符"></a>1、比较运算符</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询姓名为张飞的成绩</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> NAME<span class="operator">=</span><span class="string">&#x27;张飞&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询英语成绩大于90的同学</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> english<span class="operator">&gt;</span><span class="number">90</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询数学成绩为75，76的同学  IN（集合）</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,math <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> math <span class="keyword">IN</span>(<span class="number">75</span>,<span class="number">76</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询英语成绩为null的同学 is null 而不是 = null</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,chinese <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> chinese <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询英语成绩[70,95]区间内的同学  BETWEEN..AND</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,english <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> english <span class="keyword">BETWEEN</span> <span class="number">70</span> <span class="keyword">AND</span> <span class="number">95</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有姓张的同学  模糊查询 LIKE pattern </span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> NAME <span class="keyword">LIKE</span> <span class="string">&#x27;张%&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MySQL通配符</p>
+<ul>
+<li>%：匹配任意多个字符串。</li>
+<li>_：匹配一个字符。</li>
+</ul>
+</blockquote>
+<h2 id="2、逻辑运算符"><a href="#2、逻辑运算符" class="headerlink" title="2、逻辑运算符"></a>2、逻辑运算符</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询数学大于70，语文大于80的同学</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> math<span class="operator">&gt;</span><span class="number">70</span> <span class="keyword">AND</span> chinese<span class="operator">&gt;</span><span class="number">80</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询语文成绩不大于80的同学</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> <span class="keyword">NOT</span>(chinese<span class="operator">&gt;</span><span class="number">80</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询数学成绩大于90，或者语文成绩大于80的同学</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> math<span class="operator">&gt;</span><span class="number">90</span> <span class="keyword">OR</span> chinese<span class="operator">&gt;</span><span class="number">80</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="order-by排序"><a href="#order-by排序" class="headerlink" title="order by排序"></a>order by排序</h1><h2 id="1、单列排序"><a href="#1、单列排序" class="headerlink" title="1、单列排序"></a>1、单列排序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 排序查询 select column1,column2.. from table_name order by column_name asc|desc</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> NAME,IFNULL(chinese,<span class="number">0</span>) <span class="keyword">FROM</span> exam <span class="keyword">ORDER</span> <span class="keyword">BY</span> chinese;	<span class="comment">-- 默认升序asc</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,IFNULL(chinese,<span class="number">0</span>) <span class="keyword">FROM</span> exam <span class="keyword">ORDER</span> <span class="keyword">BY</span> chinese <span class="keyword">DESC</span>;	<span class="comment">-- 指定降序desc</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、组合排序"><a href="#2、组合排序" class="headerlink" title="2、组合排序"></a>2、组合排序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询所有同学信息，英语默认升序，英语成绩相同的情况下，按数学成绩降序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> exam <span class="keyword">ORDER</span> <span class="keyword">BY</span> english,math <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h1><blockquote>
+<p>聚合函数将会忽略空值，与此前不同，聚合函数可处理一列的值：求和，求平均等等。</p>
+</blockquote>
+<h2 id="1、COUNT：计算个数"><a href="#1、COUNT：计算个数" class="headerlink" title="1、COUNT：计算个数"></a>1、COUNT：计算个数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 统计班级共有几个学生</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(id) id_count <span class="keyword">FROM</span> exam;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="number">1</span>) <span class="keyword">FROM</span> exam;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> exam;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 统计数学成绩大于80的学生个数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(math) <span class="keyword">FROM</span> exam <span class="keyword">WHERE</span> math<span class="operator">&gt;</span><span class="number">80</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、SUM：求和"><a href="#2、SUM：求和" class="headerlink" title="2、SUM：求和"></a>2、SUM：求和</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 统计数学总成绩</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(math) <span class="keyword">FROM</span> exam;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 统计语文、英语、数学各科的总成绩</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(math),<span class="built_in">SUM</span>(chinese),<span class="built_in">SUM</span>(english) <span class="keyword">FROM</span> exam;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 统计语文、英语、数学各科的总成绩</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(IFNULL(math,<span class="number">0</span>)<span class="operator">+</span>IFNULL(chinese,<span class="number">0</span>)<span class="operator">+</span>IFNULL(english,<span class="number">0</span>)) <span class="keyword">AS</span> all_sum <span class="keyword">FROM</span> exam;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、AVG：求平均"><a href="#3、AVG：求平均" class="headerlink" title="3、AVG：求平均"></a>3、AVG：求平均</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询数学平均分</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(math) <span class="keyword">FROM</span> exam;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、MAX-MIN：最大-最小值"><a href="#4、MAX-MIN：最大-最小值" class="headerlink" title="4、MAX/MIN：最大/最小值"></a>4、MAX/MIN：最大/最小值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询最小的语文成绩</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,<span class="built_in">MIN</span>(IFNULL(chinese,<span class="number">0</span>)) <span class="keyword">FROM</span> exam;</span><br><span class="line"><span class="comment">-- 查询最大的英语成绩</span></span><br><span class="line"><span class="keyword">SELECT</span> NAME,<span class="built_in">MAX</span>(english) <span class="keyword">FROM</span> exam;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年10月17日 09:25</p>
+        <p>原始链接： <a class="post-url" href="/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/" title="Mysql基础">https://zhanglc1998.github.io/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/</a></p>
+        <footer>
+            <a href="https://zhanglc1998.github.io">
+                <img src="/images/touxiang.jpg" alt="ZhangLichao">
+                ZhangLichao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhanglc1998.github.io/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/&title=《Mysql基础》 — ZhangLichao&pic=images/mysql.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhanglc1998.github.io/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/&title=《Mysql基础》 — ZhangLichao&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhanglc1998.github.io/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mysql基础》 — ZhangLichao&url=https://zhanglc1998.github.io/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/&via=https://zhanglc1998.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhanglc1998.github.io/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhanglc1998.github.io/2020/03/11/Mysql%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Mysql/" class="color1">Mysql</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81DDL%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">一、DDL操作数据库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">1、创建数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2%E3%80%81%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">2、查看数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3%E3%80%81%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">3、修改数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4%E3%80%81%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">4、删除数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5%E3%80%81%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">5、使用数据库</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81DDL%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="post-toc-text">二、DDL操作数据表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="post-toc-text">1、创建表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BB%BA%E8%A1%A8%E6%A0%BC%E5%BC%8F"><span class="post-toc-text">建表格式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">MySQL数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%96%87%E6%9C%AC%E7%9B%B8%E5%85%B3"><span class="post-toc-text">文本相关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%95%B0%E7%9B%B8%E5%85%B3"><span class="post-toc-text">数相关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%97%B6%E9%97%B4%E7%9B%B8%E5%85%B3"><span class="post-toc-text">时间相关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%A4%8D%E5%88%B6%E8%A1%A8"><span class="post-toc-text">复制表</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2%E3%80%81%E6%9F%A5%E7%9C%8B%E8%A1%A8"><span class="post-toc-text">2、查看表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3%E3%80%81%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="post-toc-text">3、删除表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4%E3%80%81%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="post-toc-text">4、修改表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%90%8D"><span class="post-toc-text">修改表名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="post-toc-text">修改字符集</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%A1%A8%E5%88%97"><span class="post-toc-text">添加表列</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E5%88%97%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">修改列类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E5%88%97%E5%90%8D"><span class="post-toc-text">修改列名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E5%88%97"><span class="post-toc-text">删除列</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="post-toc-text">一、基本查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1%E3%80%81%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8C%87%E5%AE%9A%E4%BF%A1%E6%81%AF"><span class="post-toc-text">1、查询所有信息与指定信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2%E3%80%81%E6%B8%85%E9%99%A4%E9%87%8D%E5%A4%8D%E5%80%BC"><span class="post-toc-text">2、清除重复值</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3%E3%80%81%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%8F%82%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="post-toc-text">3、查询结果参与运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="post-toc-text">二、条件查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1%E3%80%81%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">1、比较运算符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2%E3%80%81%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">2、逻辑运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#order-by%E6%8E%92%E5%BA%8F"><span class="post-toc-text">order by排序</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1%E3%80%81%E5%8D%95%E5%88%97%E6%8E%92%E5%BA%8F"><span class="post-toc-text">1、单列排序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2%E3%80%81%E7%BB%84%E5%90%88%E6%8E%92%E5%BA%8F"><span class="post-toc-text">2、组合排序</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="post-toc-text">聚合函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1%E3%80%81COUNT%EF%BC%9A%E8%AE%A1%E7%AE%97%E4%B8%AA%E6%95%B0"><span class="post-toc-text">1、COUNT：计算个数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2%E3%80%81SUM%EF%BC%9A%E6%B1%82%E5%92%8C"><span class="post-toc-text">2、SUM：求和</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3%E3%80%81AVG%EF%BC%9A%E6%B1%82%E5%B9%B3%E5%9D%87"><span class="post-toc-text">3、AVG：求平均</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4%E3%80%81MAX-MIN%EF%BC%9A%E6%9C%80%E5%A4%A7-%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="post-toc-text">4、MAX&#x2F;MIN：最大&#x2F;最小值</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2020/04/11/SpringMvc/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          SpringMvc
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2019/08/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Self-discipline</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 ZhangLichao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://zhanglc1998.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/life/">life</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.33px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.33px;">Redis</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 20px;">SpringCloud</a> <a href="/tags/SpringMvc/" style="font-size: 10px;">SpringMvc</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>关于我</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.33px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.33px;">Redis</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 20px;">SpringCloud</a> <a href="/tags/SpringMvc/" style="font-size: 10px;">SpringMvc</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/welcome/" style="font-size: 10px;">welcome</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
