@@ -3,23 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>SpringCloud学习笔记（七）三个注册中心异同点 | ZhangLichao</title>
+  <title>Centos7部署vue（前后端分离，nginx） | ZhangLichao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="张丽超个人博客" />
   
-  <meta name="description" content="Feature euerka Consul zookeeper    服务健康检查 可配支持 服务状态，内存，硬盘等 (弱)长连接，keepalive   多数据中心 — 支持 —   kv 存储服务 — 支持 支持   一致性 — raft paxos   CAP AP CP CP   使用接口(多语言能力) http（sidecar） 支持 http 和 dns 客户端   watch">
+  <meta name="description" content="一、环境准备　 1、centos7系统　    2、mysql数据库   3、在centos7虚拟机上安装好nginx 二、部署内容准备 1、后端war包 或者可执行jar 找到打包好的jar,复制到centos上， 　　 　　 执行 java -jar  XXXX.jar,后台正常启动， 　　 ​     2、前端，VUE静态资源。 如果没有安装过node的先安装node 、npm 进入前端项">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringCloud学习笔记（七）三个注册中心异同点">
-<meta property="og:url" content="https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/index.html">
+<meta property="og:title" content="Centos7部署vue（前后端分离，nginx）">
+<meta property="og:url" content="https://zhanglc1998.github.io/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/index.html">
 <meta property="og:site_name" content="ZhangLichao">
-<meta property="og:description" content="Feature euerka Consul zookeeper    服务健康检查 可配支持 服务状态，内存，硬盘等 (弱)长连接，keepalive   多数据中心 — 支持 —   kv 存储服务 — 支持 支持   一致性 — raft paxos   CAP AP CP CP   使用接口(多语言能力) http（sidecar） 支持 http 和 dns 客户端   watch">
+<meta property="og:description" content="一、环境准备　 1、centos7系统　    2、mysql数据库   3、在centos7虚拟机上安装好nginx 二、部署内容准备 1、后端war包 或者可执行jar 找到打包好的jar,复制到centos上， 　　 　　 执行 java -jar  XXXX.jar,后台正常启动， 　　 ​     2、前端，VUE静态资源。 如果没有安装过node的先安装node 、npm 进入前端项">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-10-15T03:32:04.000Z">
-<meta property="article:modified_time" content="2021-10-17T01:16:41.738Z">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121135145708-412800060.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121135349598-1628135509.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121140246540-2065173247.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121140416577-2099931155.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121140816507-1698844391.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121141043740-283010517.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121144708598-1145499040.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121144820300-950582248.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121145441361-1441317341.png">
+<meta property="article:published_time" content="2021-10-26T11:46:00.000Z">
+<meta property="article:modified_time" content="2021-10-26T11:49:46.827Z">
 <meta property="article:author" content="ZhangLichao">
-<meta property="article:tag" content="SpringCloud">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121135145708-412800060.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -108,20 +118,20 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-SpringCloud学习笔记（七）三个注册中心异同点" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-Centos7部署vue（前后端分离，nginx）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      SpringCloud学习笔记（七）三个注册中心异同点
+      Centos7部署vue（前后端分离，nginx）
     </h1>
     <div class="post-title-bar">
       <ul>
           
         <li>
-          <i class="fa fa-calendar"></i>  2021-10-15
+          <i class="fa fa-calendar"></i>  2021-10-26
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -137,87 +147,63 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <table>
-<thead>
-<tr>
-<th align="left">Feature</th>
-<th align="left">euerka</th>
-<th align="left">Consul</th>
-<th align="left">zookeeper</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">服务健康检查</td>
-<td align="left">可配支持</td>
-<td align="left">服务状态，内存，硬盘等</td>
-<td align="left">(弱)长连接，keepalive</td>
-</tr>
-<tr>
-<td align="left">多数据中心</td>
-<td align="left">—</td>
-<td align="left">支持</td>
-<td align="left">—</td>
-</tr>
-<tr>
-<td align="left">kv 存储服务</td>
-<td align="left">—</td>
-<td align="left">支持</td>
-<td align="left">支持</td>
-</tr>
-<tr>
-<td align="left">一致性</td>
-<td align="left">—</td>
-<td align="left">raft</td>
-<td align="left">paxos</td>
-</tr>
-<tr>
-<td align="left">CAP</td>
-<td align="left">AP</td>
-<td align="left">CP</td>
-<td align="left">CP</td>
-</tr>
-<tr>
-<td align="left">使用接口(多语言能力)</td>
-<td align="left">http（sidecar）</td>
-<td align="left">支持 http 和 dns</td>
-<td align="left">客户端</td>
-</tr>
-<tr>
-<td align="left">watch 支持</td>
-<td align="left">支持 long polling/大部分增量</td>
-<td align="left">全量/支持long polling</td>
-<td align="left">支持</td>
-</tr>
-<tr>
-<td align="left">自身监控</td>
-<td align="left">metrics</td>
-<td align="left">metrics</td>
-<td align="left">—</td>
-</tr>
-<tr>
-<td align="left">安全</td>
-<td align="left">—</td>
-<td align="left">acl /https</td>
-<td align="left">acl</td>
-</tr>
-<tr>
-<td align="left">语言</td>
-<td align="left">Java</td>
-<td align="left">Go</td>
-<td align="left">Java</td>
-</tr>
-<tr>
-<td align="left">SpringCloud集成</td>
-<td align="left">已集成</td>
-<td align="left">已集成</td>
-<td align="left">已集成</td>
-</tr>
-</tbody></table>
+            <p> 一、环境准备　</p>
+<p>1、centos7系统　   </p>
+<p>2、mysql数据库  </p>
+<p>3、在centos7虚拟机上安装好nginx</p>
+<p>二、部署内容准备</p>
+<p>1、后端war包 或者可执行jar</p>
+<p>找到打包好的jar,复制到centos上，</p>
+<p>　　<img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121135145708-412800060.png" alt="img"></p>
+<p>　　</p>
+<p>执行 java -jar  XXXX.jar,后台正常启动，</p>
+<p>　　<img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121135349598-1628135509.png" alt="img"></p>
+<p>​    </p>
+<p>2、前端，VUE静态资源。</p>
+<p>如果没有安装过node的先安装node 、npm</p>
+<p>进入前端项目根目录，执行 nmp run build    </p>
+<p> <img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121140246540-2065173247.png" alt="img"></p>
+<p> 构建完成后，可以看到前端项目根目录下多了一个dist文件夹，这就是要部署的前台文件，</p>
+<p><img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121140416577-2099931155.png" alt="img"></p>
+<p>复制dist文件夹到centos下，</p>
+<p>　　<img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121140816507-1698844391.png" alt="img"></p>
+<p>3.修改nginx配置文件。</p>
+<p>　　<img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121141043740-283010517.png" alt="img"></p>
+<p>　　</p>
+<p>​     vi /usr/local/nginx/conf/nginx.conf</p>
+<p>​     新建server 节点 </p>
+<p>​     </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       8001;</span><br><span class="line">        server_name  192.168.0.178;</span><br><span class="line"> </span><br><span class="line">        location /lic/ &#123;</span><br><span class="line">            alias  /usr/local/renren/dist/;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>检查配置文件是否正确</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nginx -t</span><br></pre></td></tr></table></figure>
+
+
+
+<p>重新加载nginx配置</p>
+<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nginx -s reload</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>检查端口，并开放8001端口，</p>
+<p><img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121144708598-1145499040.png" alt="img"></p>
+<p>浏览器访问：</p>
+<p> <a target="_blank" rel="noopener" href="http://192.168.0.178:8001/lic/">http://192.168.0.178:8001/lic/</a></p>
+<p><img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121144820300-950582248.png" alt="img"></p>
+<p>一切正常。</p>
+<p>这里有几个问题需要注意：</p>
+<p>第一，前台项目的路径和nginx配置文件中配置的路径需要一直。这里用的root用户，如果用其他用户，可能访问静态资源会被禁止访问（403），需要“chmod 755 静态资源路径 ” 授权，授权的时候要逐级授权，</p>
+<p> 比如</p>
+<p>chmod 755  /usr/local/renren/dist</p>
+<p>chmod 755  /usr/local/renren</p>
+<p>chmod 755  /usr/local/</p>
+<p>chmod 755 /usr</p>
+<p>chmod 644  /usr/local/renren/dist/*</p>
+<p>第二，nginx配置文件中配置时，没有用root ,而是使用alias</p>
+<p> 　<img src="https://img2018.cnblogs.com/blog/777647/201901/777647-20190121145441361-1441317341.png" alt="img"></p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2021年10月17日 09:16</p>
-        <p>原始链接： <a class="post-url" href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/" title="SpringCloud学习笔记（七）三个注册中心异同点">https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/</a></p>
+        <p>最后更新： 2021年10月26日 19:49</p>
+        <p>原始链接： <a class="post-url" href="/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/" title="Centos7部署vue（前后端分离，nginx）">https://zhanglc1998.github.io/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/</a></p>
         <footer>
             <a href="https://zhanglc1998.github.io">
                 <img src="/images/touxiang.jpg" alt="ZhangLichao">
@@ -274,7 +260,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/&title=《SpringCloud学习笔记（七）三个注册中心异同点》 — ZhangLichao&pic=images/springcloud.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhanglc1998.github.io/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/&title=《Centos7部署vue（前后端分离，nginx）》 — ZhangLichao&pic=https://zhanglc1998.github.ioimages/touxiang.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -284,22 +270,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/&title=《SpringCloud学习笔记（七）三个注册中心异同点》 — ZhangLichao&source=" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhanglc1998.github.io/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/&title=《Centos7部署vue（前后端分离，nginx）》 — ZhangLichao&source=" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhanglc1998.github.io/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringCloud学习笔记（七）三个注册中心异同点》 — ZhangLichao&url=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/&via=https://zhanglc1998.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Centos7部署vue（前后端分离，nginx）》 — ZhangLichao&url=https://zhanglc1998.github.io/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/&via=https://zhanglc1998.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhanglc1998.github.io/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -309,7 +295,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhanglc1998.github.io/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%B8%89%E4%B8%AA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%BC%82%E5%90%8C%E7%82%B9/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhanglc1998.github.io/2021/10/26/Centos7%E9%83%A8%E7%BD%B2vue%EF%BC%88%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%8Cnginx%EF%BC%89/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -321,7 +307,7 @@
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/SpringCloud/" class="color2">SpringCloud</a>
+    <a href="/tags/Vue/" class="color4">Vue</a>
       
   </li>
 
@@ -335,19 +321,19 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/10/26/SringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
 
       <span class="article-nav-title">
         <i class="fa fa-hand-o-left" aria-hidden="true"></i>
         
-          SpringCloud学习笔记（八）Ribbon负载均衡
+          SringBoot常用注解
         
       </span>
     </a>
   
   
-    <a href="/2021/10/15/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89Consul%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">SpringCloud学习笔记（六）Consul服务注册与发现</span>
+    <a href="/2021/10/16/SpringBoot-mysql-Redis%E6%95%B4%E5%90%88%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">SpringBoot+mysql+Redis整合增删改查操作</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
